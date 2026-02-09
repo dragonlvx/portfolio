@@ -774,12 +774,12 @@ export default function MagickML() {
               Magick ML is an active open-source project. Explore the codebase, contribute, or fork it for your own AI experiments.
             </p>
             <a
-              href="https://github.com/Oneirocom/Magick"
+              href="https://www.magickml.com/"
               target="_blank"
               rel="noopener noreferrer"
               className={styles.openSourceButton}
             >
-              View on GitHub →
+              View the Website →
             </a>
           </div>
         </div>

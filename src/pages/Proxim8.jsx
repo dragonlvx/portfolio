@@ -72,16 +72,17 @@ export default function Proxim8() {
       {/* Hero Section */}
       <section className={styles.hero}>
         <div className={styles.heroVideoContainer} style={{ background: '#111' }}>
-          <video
-            src="/images/proxim8/banner-video.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
-            className={`${styles.heroVideo} ${styles.clickableImage}`}
-            style={{ objectFit: 'contain' }}
-            onClick={() => openLightbox('/images/proxim8/1.banner-video.mp4', 'Proxim8 Protocol gameplay')}
-          />
+          <a href="https://gx.games/games/la4e64/project-89-proxim8-protocol/" target="_blank" rel="noopener noreferrer" style={{ display: 'block' }}>
+            <video
+              src="/images/proxim8/banner-video.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              className={`${styles.heroVideo} ${styles.clickableImage}`}
+              style={{ objectFit: 'contain' }}
+            />
+          </a>
         </div>
         <div className={styles.heroContent}>
           <p className={styles.heroLabel}>AI‑Accelerated Game Development Case Study (Project 89)</p>
@@ -108,6 +109,14 @@ export default function Proxim8() {
               <span className={styles.quickFactValue}>{fact.value}</span>
             </div>
           ))}
+          <a
+            href="https://gx.games/games/la4e64/project-89-proxim8-protocol/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.quickFactPlayNow}
+          >
+            Play Now →
+          </a>
         </div>
       </section>
 
