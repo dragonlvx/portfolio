@@ -135,11 +135,11 @@ export default function MagickML() {
         <div className={styles.quickFactsGrid}>
           {[
             { label: 'Role', value: <>Co-Founder /<br />Chief Design Officer</> },
-            { label: 'Product', value: 'Visual AI Development Platform' },
+            { label: 'Product', value: <>Visual AI<br />Development Platform</> },
             { label: 'Scope', value: <>Design Systems ·<br />UX · UI · Strategy</> },
             { label: 'Users', value: <>Creative technologists<br />& developers</> },
-            { label: 'Years', value: '2022–2025' },
-            { label: 'Focus', value: 'AI tooling & onboarding' }
+            { label: 'Years', value: <>mid 2022<br />– early 2025</> },
+            { label: 'Focus', value: <>AI tooling<br />& onboarding</> }
           ].map((fact, i) => (
             <div key={i} className={styles.quickFactItem}>
               <span className={styles.quickFactLabel}>{fact.label}</span>

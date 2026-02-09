@@ -228,9 +228,9 @@ export default function Project89() {
           {[
             { label: 'Role', value: <>Creative Technologist /<br />Content & Ops Lead</> },
             { label: 'Type', value: <>Transmedia /<br />ARG-inspired Narrative</> },
-            { label: 'Platforms', value: 'X · Discord · Web' },
+            { label: 'Platforms', value: <>Web · X ·<br />Discord</> },
             { label: 'Media', value: <>Visual · Video ·<br />Audio · Interactive</> },
-            { label: 'Tools', value: 'Gen-AI + Design Craft' },
+            { label: 'Tools', value: <>Gen-AI ·<br />Design Craft</> },
             { label: 'Status', value: 'Ongoing' }
           ].map((fact, i) => (
             <div key={i} className={styles.quickFactItem}>

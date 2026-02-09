@@ -101,8 +101,8 @@ export default function Proxim8() {
             { label: 'Engine', value: 'GameMaker' },
             { label: 'Type', value: <>Platformer Demo<br />(Vertical Slice)</> },
             { label: 'Timeline', value: <>4 Weeks<br />(Hobby Time)</> },
-            { label: 'Scope', value: 'Design · Code · Art · Audio' },
-            { label: 'Approach', value: 'Human–AI Collaboration' }
+            { label: 'Scope', value: <>Design · Code ·<br />Art · Audio</> },
+            { label: 'Approach', value: <>Human–AI<br />Collaboration</> }
           ].map((fact, i) => (
             <div key={i} className={styles.quickFactItem}>
               <span className={styles.quickFactLabel}>{fact.label}</span>
