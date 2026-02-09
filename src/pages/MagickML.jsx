@@ -134,10 +134,10 @@ export default function MagickML() {
       <section className={styles.quickFacts}>
         <div className={styles.quickFactsGrid}>
           {[
-            { label: 'Role', value: 'Co-Founder / Chief Design Officer' },
+            { label: 'Role', value: <>Co-Founder /<br />Chief Design Officer</> },
             { label: 'Product', value: 'Visual AI Development Platform' },
-            { label: 'Scope', value: 'UX · UI · Design Systems · Strategy' },
-            { label: 'Users', value: 'Creative technologists & developers' },
+            { label: 'Scope', value: <>Design Systems ·<br />UX · UI · Strategy</> },
+            { label: 'Users', value: <>Creative technologists<br />& developers</> },
             { label: 'Years', value: '2022–2025' },
             { label: 'Focus', value: 'AI tooling & onboarding' }
           ].map((fact, i) => (
@@ -146,6 +146,14 @@ export default function MagickML() {
               <span className={styles.quickFactValue}>{fact.value}</span>
             </div>
           ))}
+          <a
+            href="https://www.magickml.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.quickFactPlayNow}
+          >
+            View Website →
+          </a>
         </div>
       </section>
 

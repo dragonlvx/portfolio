@@ -226,10 +226,10 @@ export default function Project89() {
       <section className={styles.quickFacts}>
         <div className={styles.quickFactsGrid}>
           {[
-            { label: 'Role', value: 'Creative Technologist / Content & Ops Lead' },
-            { label: 'Type', value: 'Transmedia / ARG-inspired Narrative' },
+            { label: 'Role', value: <>Creative Technologist /<br />Content & Ops Lead</> },
+            { label: 'Type', value: <>Transmedia /<br />ARG-inspired Narrative</> },
             { label: 'Platforms', value: 'X · Discord · Web' },
-            { label: 'Media', value: 'Visual · Video · Audio · Interactive' },
+            { label: 'Media', value: <>Visual · Video ·<br />Audio · Interactive</> },
             { label: 'Tools', value: 'Gen-AI + Design Craft' },
             { label: 'Status', value: 'Ongoing' }
           ].map((fact, i) => (
@@ -238,6 +238,14 @@ export default function Project89() {
               <span className={styles.quickFactValue}>{fact.value}</span>
             </div>
           ))}
+          <a
+            href="https://project89.org"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.quickFactPlayNow}
+          >
+            View Website →
+          </a>
         </div>
       </section>
 
