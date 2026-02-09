@@ -1,0 +1,227 @@
+/* Hero */
+.hero {
+  position: relative;
+  padding: 80px 24px 60px;
+  background: linear-gradient(180deg, #faf9f7 0%, #f5f3f0 100%);
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Header group with watermark behind it */
+.heroHeader {
+  position: relative;
+  margin-bottom: 60px;
+}
+
+/* Ouroboros watermark - centered behind header group */
+.heroHeader::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(200px, 32vw, 300px);
+  height: clamp(200px, 32vw, 300px);
+  background-image: url('/images/Andrew-Ouroboros-logo.PNG');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.09;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.h1 {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(42px, 8vw, 64px);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 16px;
+  color: #1a1a1a;
+}
+
+.h2 {
+  font-size: clamp(16px, 3vw, 20px);
+  font-weight: 400;
+  color: #666;
+  margin-bottom: 32px;
+  letter-spacing: -0.01em;
+}
+
+.intro {
+  font-size: clamp(17px, 2.5vw, 19px);
+  line-height: 1.7;
+  color: #444;
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+.introLine1 {
+  /* Inline by default on desktop */
+}
+
+.introLine2 {
+  /* Inline by default on desktop */
+}
+
+.desktopBreak {
+  display: block;
+}
+
+/* Subtitle title spans - inline by default */
+.title1,
+.title2,
+.title3,
+.titleSep {
+  display: inline;
+}
+
+/* Projects */
+.projectsSection {
+  padding: 40px 24px 80px;
+  background: #faf9f7;
+}
+
+.projectsGrid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 1024px) {
+  .projectsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 540px) {
+  .projectsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.projectCard {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.projectCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.projectOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+  transition: opacity 0.25s ease;
+  z-index: 2;
+}
+
+.projectTitle {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 24px;
+  font-weight: 500;
+  color: #fff;
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+}
+
+.projectSubtitle {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.5;
+  max-width: 220px;
+}
+
+.viewButton {
+  margin-top: 20px;
+  padding: 12px 24px;
+  background: #e07a5f;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 768px) {
+  .projectCard {
+    aspect-ratio: 4/3;
+  }
+
+  .heroHeader {
+    margin-bottom: 40px;
+  }
+
+  /* Scale down watermark on tablet */
+  .heroHeader::before {
+    width: 220px;
+    height: 220px;
+    opacity: 0.10;
+  }
+}
+
+@media (max-width: 540px) {
+  .heroHeader {
+    margin-bottom: 32px;
+  }
+
+  /* Scale down watermark on mobile - centered on h1 only */
+  .heroHeader::before {
+    top: 35px;
+    width: 260px;
+    height: 260px;
+    opacity: 0.08;
+  }
+
+  /* "Hey! I'm Andrew." on its own line */
+  .introLine1 {
+    display: block;
+    margin-bottom: 0.3em;
+  }
+
+  /* "I design..." on its own line */
+  .introLine2 {
+    display: block;
+  }
+
+  /* Hide the desktop line break on mobile */
+  .desktopBreak {
+    display: none;
+  }
+
+  /* Stack subtitle titles vertically on mobile */
+  .title1,
+  .title2,
+  .title3 {
+    display: block;
+  }
+
+  .titleSep {
+    display: none;
+  }
+}
