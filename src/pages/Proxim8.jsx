@@ -97,9 +97,9 @@ export default function Proxim8() {
       <section className={styles.quickFacts}>
         <div className={styles.quickFactsGrid}>
           {[
-            { label: 'Role', value: 'Game Designer & Developer (Solo)' },
+            { label: 'Role', value: <>Game Designer & Developer<br />(Solo)</> },
             { label: 'Engine', value: 'GameMaker' },
-            { label: 'Type', value: 'Platformer Demo (Vertical Slice)' },
+            { label: 'Type', value: <>Platformer Demo<br />(Vertical Slice)</> },
             { label: 'Timeline', value: <>4 Weeks<br />(Hobby Time)</> },
             { label: 'Scope', value: 'Design · Code · Art · Audio' },
             { label: 'Approach', value: 'Human–AI Collaboration' }

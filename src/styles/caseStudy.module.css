@@ -25,26 +25,21 @@
 
 .heroVideoContainer {
   width: 100%;
-  height: 60vh;
-  max-height: 700px;
   overflow: hidden;
 }
 
 .heroVideo {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  display: block;
+  object-fit: contain;
 }
 
 @media (max-width: 768px) {
   .heroVideoContainer {
-    height: auto;
-    max-height: none;
     overflow: visible;
   }
 
   .heroVideo {
-    height: auto;
     object-fit: contain;
   }
 }
@@ -95,11 +90,13 @@
 }
 
 .quickFactsGrid {
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
   gap: 24px;
+  flex-wrap: nowrap;
 }
 
 .quickFactItem {
@@ -107,6 +104,7 @@
   flex-direction: column;
   gap: 6px;
   text-align: center;
+  flex-shrink: 0;
 }
 
 .quickFactLabel {
@@ -132,15 +130,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 15px;
+  align-self: center;
+  font-size: 14px;
   font-weight: 600;
   color: #fff;
   background: #1a1a1a;
   border-radius: 8px;
-  padding: 12px 20px;
+  padding: 10px 20px;
   text-decoration: none;
   white-space: nowrap;
   transition: background 0.2s;
+  flex-shrink: 0;
 }
 
 .quickFactPlayNow:hover {
@@ -2186,7 +2186,18 @@
   }
 
   .quickFactsGrid {
-    grid-template-columns: repeat(2, 1fr);
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .quickFactItem {
+    width: calc(50% - 10px);
+    flex-shrink: 1;
+  }
+
+  .quickFactPlayNow {
+    width: 100%;
+    max-width: 200px;
   }
 
   .rolesGrid {
