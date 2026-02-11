@@ -2,8 +2,10 @@ import { useState, useEffect, useRef, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import styles from '../styles/caseStudy.module.css';
 import Lightbox from '../components/Lightbox';
+import useIsMobile from '../hooks/useIsMobile';
 
 export default function Project89() {
+  const isMobile = useIsMobile();
   const [lightboxIndex, setLightboxIndex] = useState(null);
   const [beforeAfterIndex, setBeforeAfterIndex] = useState(0);
   const [isAutoScrolling, setIsAutoScrolling] = useState(true);
@@ -204,14 +206,22 @@ export default function Project89() {
       {/* Hero Section */}
       <section className={styles.hero}>
         <div className={styles.heroImageContainer}>
-          <video
-            src="/images/project89/89-banner.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
-            className={styles.heroImage}
-          />
+          {isMobile ? (
+            <img
+              src="/images/project89/89-banner-poster.jpg"
+              alt="Project 89 Banner"
+              className={styles.heroImage}
+            />
+          ) : (
+            <video
+              src="/images/project89/89-banner.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              className={styles.heroImage}
+            />
+          )}
         </div>
         <div className={styles.heroContent}>
           <h1 className={styles.heroTitle}>Project 89</h1>
@@ -254,23 +264,33 @@ export default function Project89() {
         <div className={styles.sectionInnerWide}>
           <div
             className={styles.sectionBanner}
-            onMouseEnter={(e) => {
+            onMouseEnter={isMobile ? undefined : (e) => {
               const video = e.currentTarget.querySelector('video');
               if (video) video.play();
             }}
-            onMouseLeave={(e) => {
+            onMouseLeave={isMobile ? undefined : (e) => {
               const video = e.currentTarget.querySelector('video');
               if (video) { video.pause(); video.currentTime = 0; }
             }}
           >
-            <video
-              src="/images/project89/89banner1.mp4"
-              muted
-              loop
-              playsInline
-              className={`${styles.sectionBannerVideo} ${styles.clickableImage}`}
-              onClick={() => openLightbox('/images/project89/89banner1.mp4', 'Project 89 Concept Banner')}
-            />
+            {isMobile ? (
+              <img
+                src="/images/project89/89banner1-poster.jpg"
+                alt="Project 89 Concept Banner"
+                loading="lazy"
+                className={`${styles.sectionBannerVideo} ${styles.clickableImage}`}
+                onClick={() => openLightbox('/images/project89/89banner1.mp4', 'Project 89 Concept Banner')}
+              />
+            ) : (
+              <video
+                src="/images/project89/89banner1.mp4"
+                muted
+                loop
+                playsInline
+                className={`${styles.sectionBannerVideo} ${styles.clickableImage}`}
+                onClick={() => openLightbox('/images/project89/89banner1.mp4', 'Project 89 Concept Banner')}
+              />
+            )}
           </div>
         </div>
         <div className={styles.sectionInner}>
@@ -291,6 +311,7 @@ export default function Project89() {
                   <img
                     src={item.image}
                     alt={item.text}
+                    loading="lazy"
                     className={`${styles.conceptImage} ${styles.clickableImage}`}
                     onClick={() => openLightbox(item.image, item.text)}
                   />
@@ -310,23 +331,33 @@ export default function Project89() {
         <div className={styles.sectionInnerWide}>
           <div
             className={styles.sectionBanner}
-            onMouseEnter={(e) => {
+            onMouseEnter={isMobile ? undefined : (e) => {
               const video = e.currentTarget.querySelector('video');
               if (video) video.play();
             }}
-            onMouseLeave={(e) => {
+            onMouseLeave={isMobile ? undefined : (e) => {
               const video = e.currentTarget.querySelector('video');
               if (video) { video.pause(); video.currentTime = 0; }
             }}
           >
-            <video
-              src="/images/project89/89banner-dragon.mp4"
-              muted
-              loop
-              playsInline
-              className={`${styles.sectionBannerVideo} ${styles.clickableImage}`}
-              onClick={() => openLightbox('/images/project89/89banner-dragon.mp4', 'My Role Banner')}
-            />
+            {isMobile ? (
+              <img
+                src="/images/project89/89banner-dragon-poster.jpg"
+                alt="My Role Banner"
+                loading="lazy"
+                className={`${styles.sectionBannerVideo} ${styles.clickableImage}`}
+                onClick={() => openLightbox('/images/project89/89banner-dragon.mp4', 'My Role Banner')}
+              />
+            ) : (
+              <video
+                src="/images/project89/89banner-dragon.mp4"
+                muted
+                loop
+                playsInline
+                className={`${styles.sectionBannerVideo} ${styles.clickableImage}`}
+                onClick={() => openLightbox('/images/project89/89banner-dragon.mp4', 'My Role Banner')}
+              />
+            )}
           </div>
         </div>
         <div className={styles.sectionInner}>
@@ -371,6 +402,7 @@ export default function Project89() {
                   <img
                     src={role.image}
                     alt={role.title}
+                    loading="lazy"
                     className={`${role.topAlign ? styles.roleCardImgTop : styles.roleCardImg} ${styles.clickableImage}`}
                     onClick={() => openLightbox(role.image, role.title)}
                   />
@@ -397,23 +429,33 @@ export default function Project89() {
         <div className={styles.sectionInnerWide}>
           <div
             className={styles.sectionBannerDark}
-            onMouseEnter={(e) => {
+            onMouseEnter={isMobile ? undefined : (e) => {
               const video = e.currentTarget.querySelector('video');
               if (video) video.play();
             }}
-            onMouseLeave={(e) => {
+            onMouseLeave={isMobile ? undefined : (e) => {
               const video = e.currentTarget.querySelector('video');
               if (video) { video.pause(); video.currentTime = 0; }
             }}
           >
-            <video
-              src="/images/project89/89banner-glitch.mp4"
-              muted
-              loop
-              playsInline
-              className={`${styles.sectionBannerVideo} ${styles.clickableImage}`}
-              onClick={() => openLightbox('/images/project89/89banner-glitch.mp4', 'What We Built Banner')}
-            />
+            {isMobile ? (
+              <img
+                src="/images/project89/89banner-glitch-poster.jpg"
+                alt="What We Built Banner"
+                loading="lazy"
+                className={`${styles.sectionBannerVideo} ${styles.clickableImage}`}
+                onClick={() => openLightbox('/images/project89/89banner-glitch.mp4', 'What We Built Banner')}
+              />
+            ) : (
+              <video
+                src="/images/project89/89banner-glitch.mp4"
+                muted
+                loop
+                playsInline
+                className={`${styles.sectionBannerVideo} ${styles.clickableImage}`}
+                onClick={() => openLightbox('/images/project89/89banner-glitch.mp4', 'What We Built Banner')}
+              />
+            )}
           </div>
         </div>
         <div className={styles.sectionInner}>
@@ -445,24 +487,34 @@ export default function Project89() {
               <div
                 key={i}
                 className={styles.builtCard}
-                onMouseEnter={(e) => {
+                onMouseEnter={isMobile ? undefined : (e) => {
                   const video = e.currentTarget.querySelector('video');
                   if (video) video.play();
                 }}
-                onMouseLeave={(e) => {
+                onMouseLeave={isMobile ? undefined : (e) => {
                   const video = e.currentTarget.querySelector('video');
                   if (video) { video.pause(); video.currentTime = 0; }
                 }}
               >
                 <div className={styles.builtCardVideo}>
-                  <video
-                    src={item.video}
-                    muted
-                    loop
-                    playsInline
-                    className={styles.builtVideo}
-                    onClick={() => openLightbox(item.video, item.title)}
-                  />
+                  {isMobile ? (
+                    <img
+                      src={item.video.replace('.mp4', '-poster.jpg')}
+                      alt={item.title}
+                      loading="lazy"
+                      className={styles.builtVideo}
+                      onClick={() => openLightbox(item.video, item.title)}
+                    />
+                  ) : (
+                    <video
+                      src={item.video}
+                      muted
+                      loop
+                      playsInline
+                      className={styles.builtVideo}
+                      onClick={() => openLightbox(item.video, item.title)}
+                    />
+                  )}
                 </div>
                 <div className={styles.builtCardContent}>
                   <h3 className={styles.builtCardTitle}>{item.title}</h3>
@@ -489,23 +541,33 @@ export default function Project89() {
         <div className={styles.sectionInnerWide}>
           <div
             className={styles.sectionBanner}
-            onMouseEnter={(e) => {
+            onMouseEnter={isMobile ? undefined : (e) => {
               const video = e.currentTarget.querySelector('video');
               if (video) video.play();
             }}
-            onMouseLeave={(e) => {
+            onMouseLeave={isMobile ? undefined : (e) => {
               const video = e.currentTarget.querySelector('video');
               if (video) { video.pause(); video.currentTime = 0; }
             }}
           >
-            <video
-              src="/images/project89/animated-eye.mp4"
-              muted
-              loop
-              playsInline
-              className={`${styles.sectionBannerVideo} ${styles.clickableImage}`}
-              onClick={() => openLightbox('/images/project89/animated-eye.mp4', 'Visual Content Pipeline')}
-            />
+            {isMobile ? (
+              <img
+                src="/images/project89/animated-eye-poster.jpg"
+                alt="Visual Content Pipeline"
+                loading="lazy"
+                className={`${styles.sectionBannerVideo} ${styles.clickableImage}`}
+                onClick={() => openLightbox('/images/project89/animated-eye.mp4', 'Visual Content Pipeline')}
+              />
+            ) : (
+              <video
+                src="/images/project89/animated-eye.mp4"
+                muted
+                loop
+                playsInline
+                className={`${styles.sectionBannerVideo} ${styles.clickableImage}`}
+                onClick={() => openLightbox('/images/project89/animated-eye.mp4', 'Visual Content Pipeline')}
+              />
+            )}
           </div>
         </div>
         <div className={styles.sectionInner}>
@@ -546,6 +608,7 @@ export default function Project89() {
                     <img
                       src={beforeAfterImages[beforeAfterIndex].before}
                       alt={`${beforeAfterImages[beforeAfterIndex].name} - Before`}
+                      loading="lazy"
                       className={`${styles.beforeAfterImage} ${styles.clickableImage}`}
                       onClick={() => openLightbox(beforeAfterImages[beforeAfterIndex].before, `${beforeAfterImages[beforeAfterIndex].name} - Before`)}
                     />
@@ -568,6 +631,7 @@ export default function Project89() {
                     <img
                       src={beforeAfterImages[beforeAfterIndex].after}
                       alt={`${beforeAfterImages[beforeAfterIndex].name} - After`}
+                      loading="lazy"
                       className={`${styles.beforeAfterImage} ${styles.clickableImage}`}
                       onClick={() => openLightbox(beforeAfterImages[beforeAfterIndex].after, `${beforeAfterImages[beforeAfterIndex].name} - After`)}
                     />
@@ -619,6 +683,7 @@ export default function Project89() {
                     <img
                       src={item.src}
                       alt={item.alt}
+                      loading="lazy"
                       className={`${styles.infiniteCarouselImage} ${styles.clickableImage}`}
                       onClick={() => openLightbox(item.src, item.alt)}
                     />
@@ -635,23 +700,33 @@ export default function Project89() {
         <div className={styles.sectionInnerWide}>
           <div
             className={styles.sectionBannerDark}
-            onMouseEnter={(e) => {
+            onMouseEnter={isMobile ? undefined : (e) => {
               const video = e.currentTarget.querySelector('video');
               if (video) video.play();
             }}
-            onMouseLeave={(e) => {
+            onMouseLeave={isMobile ? undefined : (e) => {
               const video = e.currentTarget.querySelector('video');
               if (video) { video.pause(); video.currentTime = 0; }
             }}
           >
-            <video
-              src="/images/project89/animated-cyber-tree.mp4"
-              muted
-              loop
-              playsInline
-              className={`${styles.sectionBannerVideo} ${styles.clickableImage}`}
-              onClick={() => openLightbox('/images/project89/animated-cyber-tree.mp4', 'AI-Native Video Production')}
-            />
+            {isMobile ? (
+              <img
+                src="/images/project89/animated-cyber-tree-poster.jpg"
+                alt="AI-Native Video Production"
+                loading="lazy"
+                className={`${styles.sectionBannerVideo} ${styles.clickableImage}`}
+                onClick={() => openLightbox('/images/project89/animated-cyber-tree.mp4', 'AI-Native Video Production')}
+              />
+            ) : (
+              <video
+                src="/images/project89/animated-cyber-tree.mp4"
+                muted
+                loop
+                playsInline
+                className={`${styles.sectionBannerVideo} ${styles.clickableImage}`}
+                onClick={() => openLightbox('/images/project89/animated-cyber-tree.mp4', 'AI-Native Video Production')}
+              />
+            )}
           </div>
         </div>
         <div className={styles.sectionInner}>
@@ -724,36 +799,48 @@ export default function Project89() {
               <div
                 key={i}
                 className={styles.pipelineStep}
-                onMouseEnter={(e) => {
+                onMouseEnter={isMobile ? undefined : (e) => {
                   const video = e.currentTarget.querySelector('video');
                   if (video) video.play();
                 }}
-                onMouseLeave={(e) => {
+                onMouseLeave={isMobile ? undefined : (e) => {
                   const video = e.currentTarget.querySelector('video');
                   if (video) { video.pause(); video.currentTime = 0; }
                 }}
               >
                 <div className={styles.pipelineStepMedia}>
                   {item.isVideo ? (
-                    <video
-                      src={item.media}
-                      muted
-                      loop
-                      playsInline
-                      className={styles.pipelineStepVideo}
-                      onClick={() => openLightbox(item.media, item.title)}
-                    />
+                    isMobile ? (
+                      <img
+                        src={item.media.replace('.mp4', '-poster.jpg')}
+                        alt={item.title}
+                        loading="lazy"
+                        className={styles.pipelineStepVideo}
+                        onClick={() => openLightbox(item.media, item.title)}
+                      />
+                    ) : (
+                      <video
+                        src={item.media}
+                        muted
+                        loop
+                        playsInline
+                        className={styles.pipelineStepVideo}
+                        onClick={() => openLightbox(item.media, item.title)}
+                      />
+                    )
                   ) : item.hasHoverImage ? (
                     <div className={styles.hoverImageContainer}>
                       <img
                         src={item.media}
                         alt={item.title}
+                        loading="lazy"
                         className={`${styles.pipelineStepImg} ${styles.hoverImageBase}`}
                         onClick={() => openLightbox(item.media, item.title)}
                       />
                       <img
                         src={item.mediaHover}
                         alt={`${item.title} - hover`}
+                        loading="lazy"
                         className={`${styles.pipelineStepImg} ${styles.hoverImageOverlay}`}
                         onClick={() => openLightbox(item.mediaHover, item.title)}
                       />
@@ -762,6 +849,7 @@ export default function Project89() {
                     <img
                       src={item.media}
                       alt={item.title}
+                      loading="lazy"
                       className={`${styles.pipelineStepImg} ${styles.clickableImage}`}
                       onClick={() => openLightbox(item.media, item.title)}
                     />
@@ -785,24 +873,34 @@ export default function Project89() {
             <div className={styles.tutorialVideos}>
               <div
                 className={styles.tutorialVideoCard}
-                onMouseEnter={(e) => {
+                onMouseEnter={isMobile ? undefined : (e) => {
                   const video = e.currentTarget.querySelector('video');
                   if (video) video.play();
                 }}
-                onMouseLeave={(e) => {
+                onMouseLeave={isMobile ? undefined : (e) => {
                   const video = e.currentTarget.querySelector('video');
                   if (video) { video.pause(); video.currentTime = 0; }
                 }}
               >
                 <div className={styles.tutorialVideoWrapper}>
-                  <video
-                    src="/images/project89/how-to-make-PX8-message-video.mp4"
-                    muted
-                    loop
-                    playsInline
-                    className={styles.tutorialVideo}
-                    onClick={() => openLightbox('/images/project89/how-to-make-PX8-message-video.mp4', 'How to Make PX8 Message Video')}
-                  />
+                  {isMobile ? (
+                    <img
+                      src="/images/project89/how-to-make-PX8-message-video-poster.jpg"
+                      alt="How to Make PX8 Message Video"
+                      loading="lazy"
+                      className={styles.tutorialVideo}
+                      onClick={() => openLightbox('/images/project89/how-to-make-PX8-message-video.mp4', 'How to Make PX8 Message Video')}
+                    />
+                  ) : (
+                    <video
+                      src="/images/project89/how-to-make-PX8-message-video.mp4"
+                      muted
+                      loop
+                      playsInline
+                      className={styles.tutorialVideo}
+                      onClick={() => openLightbox('/images/project89/how-to-make-PX8-message-video.mp4', 'How to Make PX8 Message Video')}
+                    />
+                  )}
                 </div>
                 <div className={styles.tutorialVideoLabel}>
                   <span className={styles.tutorialBadge}>Tutorial</span>
@@ -811,24 +909,34 @@ export default function Project89() {
               </div>
               <div
                 className={styles.tutorialVideoCard}
-                onMouseEnter={(e) => {
+                onMouseEnter={isMobile ? undefined : (e) => {
                   const video = e.currentTarget.querySelector('video');
                   if (video) video.play();
                 }}
-                onMouseLeave={(e) => {
+                onMouseLeave={isMobile ? undefined : (e) => {
                   const video = e.currentTarget.querySelector('video');
                   if (video) { video.pause(); video.currentTime = 0; }
                 }}
               >
                 <div className={styles.tutorialVideoWrapper}>
-                  <video
-                    src="/images/project89/PX8-message.mp4"
-                    muted
-                    loop
-                    playsInline
-                    className={styles.tutorialVideo}
-                    onClick={() => openLightbox('/images/project89/PX8-message.mp4', 'PX8 Message Example')}
-                  />
+                  {isMobile ? (
+                    <img
+                      src="/images/project89/PX8-message-poster.jpg"
+                      alt="PX8 Message Example"
+                      loading="lazy"
+                      className={styles.tutorialVideo}
+                      onClick={() => openLightbox('/images/project89/PX8-message.mp4', 'PX8 Message Example')}
+                    />
+                  ) : (
+                    <video
+                      src="/images/project89/PX8-message.mp4"
+                      muted
+                      loop
+                      playsInline
+                      className={styles.tutorialVideo}
+                      onClick={() => openLightbox('/images/project89/PX8-message.mp4', 'PX8 Message Example')}
+                    />
+                  )}
                 </div>
                 <div className={styles.tutorialVideoLabel}>
                   <span className={styles.tutorialBadge}>Result</span>
@@ -861,26 +969,36 @@ export default function Project89() {
               <div
                 key={i}
                 className={styles.videoCarouselItem}
-                onMouseEnter={(e) => {
+                onMouseEnter={isMobile ? undefined : (e) => {
                   const video = e.currentTarget.querySelector('video');
                   if (video) video.play();
                 }}
-                onMouseLeave={(e) => {
+                onMouseLeave={isMobile ? undefined : (e) => {
                   const video = e.currentTarget.querySelector('video');
                   if (video) { video.pause(); video.currentTime = 0; }
                 }}
               >
                 <div className={styles.videoCarouselBadge}>{item.type}</div>
-                <video
-                  src={item.src}
-                  muted
-                  loop
-                  playsInline
-                  preload="metadata"
-                  poster={item.poster}
-                  className={styles.videoCarouselVideo}
-                  onClick={() => openLightbox(item.src, item.title)}
-                />
+                {isMobile ? (
+                  <img
+                    src={item.poster || item.src.replace('.mp4', '-poster.jpg')}
+                    alt={item.title}
+                    loading="lazy"
+                    className={styles.videoCarouselVideo}
+                    onClick={() => openLightbox(item.src, item.title)}
+                  />
+                ) : (
+                  <video
+                    src={item.src}
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                    poster={item.poster}
+                    className={styles.videoCarouselVideo}
+                    onClick={() => openLightbox(item.src, item.title)}
+                  />
+                )}
                 <div className={styles.videoCarouselTitle}>{item.title}</div>
               </div>
             ))}
@@ -949,6 +1067,7 @@ export default function Project89() {
             <img
               src="/images/project89/89wordmark.png"
               alt="Project 89 Logo"
+              loading="lazy"
               className={styles.openSourceLogo}
             />
             <h3 className={styles.openSourceTitle}>Ongoing Project</h3>

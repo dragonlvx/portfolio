@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styles from './Layout.module.css';
+import useIsMobile from '../hooks/useIsMobile';
 
 const EMAIL = 'a.dasilva@project89.org';
 
@@ -17,6 +18,7 @@ export default function Layout({ children }) {
   const [showCopied, setShowCopied] = useState(false);
   const dropdownRef = useRef(null);
   const location = useLocation();
+  const isMobile = useIsMobile();
   const isHome = location.pathname === '/';
   const isWorkPage = location.pathname.startsWith('/work/');
 
@@ -41,7 +43,6 @@ export default function Layout({ children }) {
     e.preventDefault();
     navigator.clipboard.writeText(EMAIL).then(() => {
       setShowCopied(true);
-      const isMobile = window.innerWidth <= 768;
       if (isMobile) {
         setTimeout(() => {
           setShowCopied(false);

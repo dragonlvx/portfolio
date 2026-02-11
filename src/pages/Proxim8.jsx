@@ -2,8 +2,10 @@ import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styles from '../styles/caseStudy.module.css';
 import Lightbox from '../components/Lightbox';
+import useIsMobile from '../hooks/useIsMobile';
 
 export default function Proxim8() {
+  const isMobile = useIsMobile();
   const [lightboxIndex, setLightboxIndex] = useState(null);
   const [demoPaused, setDemoPaused] = useState(false);
   const [demoHovered, setDemoHovered] = useState(false);
@@ -73,15 +75,24 @@ export default function Proxim8() {
       <section className={styles.hero}>
         <div className={styles.heroVideoContainer} style={{ background: '#111' }}>
           <a href="https://gx.games/games/la4e64/project-89-proxim8-protocol/" target="_blank" rel="noopener noreferrer" style={{ display: 'block' }}>
-            <video
-              src="/images/proxim8/banner-video.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
-              className={`${styles.heroVideo} ${styles.clickableImage}`}
-              style={{ objectFit: 'contain' }}
-            />
+            {isMobile ? (
+              <img
+                src="/images/proxim8/banner-video-poster.jpg"
+                alt="Proxim8 Protocol gameplay"
+                className={`${styles.heroVideo} ${styles.clickableImage}`}
+                style={{ objectFit: 'contain', width: '100%' }}
+              />
+            ) : (
+              <video
+                src="/images/proxim8/banner-video.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                className={`${styles.heroVideo} ${styles.clickableImage}`}
+                style={{ objectFit: 'contain' }}
+              />
+            )}
           </a>
         </div>
         <div className={styles.heroContent}>
@@ -127,6 +138,7 @@ export default function Proxim8() {
             <img
               src="/images/proxim8/header1.png"
               alt="Proxim8 Protocol gameplay overview"
+              loading="lazy"
               className={`${styles.sectionBannerImage} ${styles.clickableImage}`}
               onClick={() => openLightbox('/images/proxim8/header1.png', 'Proxim8 Protocol gameplay overview')}
             />
@@ -159,17 +171,28 @@ export default function Proxim8() {
                 display: 'flex',
                 flexDirection: 'column'
               }}>
-                <video
-                  src={challenge.video}
-                  loop
-                  muted
-                  playsInline
-                  className={styles.clickableImage}
-                  style={{ width: '100%', height: '160px', objectFit: 'cover' }}
-                  onMouseEnter={(e) => e.target.play()}
-                  onMouseLeave={(e) => { e.target.pause(); e.target.currentTime = 0; }}
-                  onClick={() => openLightbox(challenge.video, challenge.text)}
-                />
+                {isMobile ? (
+                  <img
+                    src={challenge.video.replace('.mp4', '-poster.jpg')}
+                    alt={challenge.text}
+                    loading="lazy"
+                    className={styles.clickableImage}
+                    style={{ width: '100%', height: '160px', objectFit: 'cover' }}
+                    onClick={() => openLightbox(challenge.video, challenge.text)}
+                  />
+                ) : (
+                  <video
+                    src={challenge.video}
+                    loop
+                    muted
+                    playsInline
+                    className={styles.clickableImage}
+                    style={{ width: '100%', height: '160px', objectFit: 'cover' }}
+                    onMouseEnter={(e) => e.target.play()}
+                    onMouseLeave={(e) => { e.target.pause(); e.target.currentTime = 0; }}
+                    onClick={() => openLightbox(challenge.video, challenge.text)}
+                  />
+                )}
                 <div style={{ padding: '16px', textAlign: 'center' }}>
                   <span style={{ color: '#888', fontSize: '13px', fontWeight: '600', display: 'block', marginBottom: '8px' }}>{String(i + 1).padStart(2, '0')}</span>
                   <span style={{ fontSize: '14px', lineHeight: '1.5', color: '#444' }}>{challenge.text}</span>
@@ -190,79 +213,90 @@ export default function Proxim8() {
             onMouseEnter={() => setDemoHovered(true)}
             onMouseLeave={() => setDemoHovered(false)}
           >
-            <video
-              ref={demoVideoRef}
-              src="/images/proxim8/full-demo.mp4"
-              autoPlay
-              muted
-              playsInline
-              loop
-              style={{ width: '100%', display: 'block' }}
-            />
-            {/* Pause/Play button - visible on hover */}
-            {demoHovered && (
-              <button
-                onClick={() => {
-                  if (demoPaused) {
-                    demoVideoRef.current.play();
-                    setDemoPaused(false);
-                  } else {
-                    demoVideoRef.current.pause();
-                    setDemoPaused(true);
-                  }
-                }}
-                style={{
-                  position: 'absolute',
-                  top: '50%',
-                  left: '50%',
-                  transform: 'translate(-50%, -50%)',
-                  background: 'rgba(0,0,0,0.6)',
-                  border: 'none',
-                  borderRadius: '50%',
-                  width: '60px',
-                  height: '60px',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: '#fff',
-                  fontSize: '24px',
-                  transition: 'opacity 0.2s'
-                }}
-              >
-                {demoPaused ? '▶' : '⏸'}
-              </button>
+            {isMobile ? (
+              <img
+                src="/images/proxim8/full-demo-poster.jpg"
+                alt="Full demo playthrough"
+                loading="lazy"
+                style={{ width: '100%', display: 'block' }}
+              />
+            ) : (
+              <>
+                <video
+                  ref={demoVideoRef}
+                  src="/images/proxim8/full-demo.mp4"
+                  autoPlay
+                  muted
+                  playsInline
+                  loop
+                  style={{ width: '100%', display: 'block' }}
+                />
+                {/* Pause/Play button - visible on hover */}
+                {demoHovered && (
+                  <button
+                    onClick={() => {
+                      if (demoPaused) {
+                        demoVideoRef.current.play();
+                        setDemoPaused(false);
+                      } else {
+                        demoVideoRef.current.pause();
+                        setDemoPaused(true);
+                      }
+                    }}
+                    style={{
+                      position: 'absolute',
+                      top: '50%',
+                      left: '50%',
+                      transform: 'translate(-50%, -50%)',
+                      background: 'rgba(0,0,0,0.6)',
+                      border: 'none',
+                      borderRadius: '50%',
+                      width: '60px',
+                      height: '60px',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: '#fff',
+                      fontSize: '24px',
+                      transition: 'opacity 0.2s'
+                    }}
+                  >
+                    {demoPaused ? '▶' : '⏸'}
+                  </button>
+                )}
+                {/* Fullscreen button - bottom right corner */}
+                <button
+                  onClick={() => {
+                    if (demoVideoRef.current.requestFullscreen) {
+                      demoVideoRef.current.requestFullscreen();
+                    } else if (demoVideoRef.current.webkitRequestFullscreen) {
+                      demoVideoRef.current.webkitRequestFullscreen();
+                    } else if (demoVideoRef.current.webkitEnterFullscreen) {
+                      demoVideoRef.current.webkitEnterFullscreen();
+                    }
+                  }}
+                  style={{
+                    position: 'absolute',
+                    bottom: '12px',
+                    right: '12px',
+                    background: 'rgba(0,0,0,0.6)',
+                    border: 'none',
+                    borderRadius: '8px',
+                    width: '36px',
+                    height: '36px',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#fff',
+                    fontSize: '16px'
+                  }}
+                >
+                  ⛶
+                </button>
+              </>
             )}
-            {/* Fullscreen button - bottom right corner */}
-            <button
-              onClick={() => {
-                if (demoVideoRef.current.requestFullscreen) {
-                  demoVideoRef.current.requestFullscreen();
-                } else if (demoVideoRef.current.webkitRequestFullscreen) {
-                  demoVideoRef.current.webkitRequestFullscreen();
-                } else if (demoVideoRef.current.webkitEnterFullscreen) {
-                  demoVideoRef.current.webkitEnterFullscreen();
-                }
-              }}
-              style={{
-                position: 'absolute',
-                bottom: '12px',
-                right: '12px',
-                background: 'rgba(0,0,0,0.6)',
-                border: 'none',
-                borderRadius: '8px',
-                width: '36px',
-                height: '36px',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: '#fff',
-                fontSize: '16px'
-              }}
-            >
-              ⛶
-            </button>
             <span className={styles.imageLabel} style={{ color: 'rgba(255,255,255,0.7)', marginTop: '8px', display: 'block' }}>Full demo playthrough</span>
           </div>
 
@@ -289,16 +323,26 @@ export default function Proxim8() {
       <section className={styles.section}>
         <div className={styles.sectionInnerWide}>
           <div className={styles.sectionBanner}>
-            <video
-              src="/images/proxim8/cutscene-clip-briefing.mp4"
-              muted
-              playsInline
-              loop
-              className={`${styles.sectionBannerVideo} ${styles.clickableImage}`}
-              onMouseEnter={(e) => e.target.play()}
-              onMouseLeave={(e) => { e.target.pause(); e.target.currentTime = 0; }}
-              onClick={() => openLightbox('/images/proxim8/cutscene-clip-briefing.mp4', 'Mission briefing cutscene')}
-            />
+            {isMobile ? (
+              <img
+                src="/images/proxim8/cutscene-clip-briefing-poster.jpg"
+                alt="Mission briefing cutscene"
+                loading="lazy"
+                className={`${styles.sectionBannerVideo} ${styles.clickableImage}`}
+                onClick={() => openLightbox('/images/proxim8/cutscene-clip-briefing.mp4', 'Mission briefing cutscene')}
+              />
+            ) : (
+              <video
+                src="/images/proxim8/cutscene-clip-briefing.mp4"
+                muted
+                playsInline
+                loop
+                className={`${styles.sectionBannerVideo} ${styles.clickableImage}`}
+                onMouseEnter={(e) => e.target.play()}
+                onMouseLeave={(e) => { e.target.pause(); e.target.currentTime = 0; }}
+                onClick={() => openLightbox('/images/proxim8/cutscene-clip-briefing.mp4', 'Mission briefing cutscene')}
+              />
+            )}
           </div>
         </div>
         <div className={styles.sectionInner}>
@@ -314,17 +358,28 @@ export default function Proxim8() {
               overflow: 'hidden'
             }}>
               <div style={{ height: '140px', overflow: 'hidden' }}>
-                <video
-                  src="/images/proxim8/game-mechanics1.mp4"
-                  muted
-                  playsInline
-                  loop
-                  className={styles.clickableImage}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                  onMouseEnter={(e) => e.target.play()}
-                  onMouseLeave={(e) => { e.target.pause(); e.target.currentTime = 0; }}
-                  onClick={() => openLightbox('/images/proxim8/game-mechanics1.mp4', 'Game mechanics gameplay')}
-                />
+                {isMobile ? (
+                  <img
+                    src="/images/proxim8/game-mechanics1-poster.jpg"
+                    alt="Game mechanics gameplay"
+                    loading="lazy"
+                    className={styles.clickableImage}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    onClick={() => openLightbox('/images/proxim8/game-mechanics1.mp4', 'Game mechanics gameplay')}
+                  />
+                ) : (
+                  <video
+                    src="/images/proxim8/game-mechanics1.mp4"
+                    muted
+                    playsInline
+                    loop
+                    className={styles.clickableImage}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    onMouseEnter={(e) => e.target.play()}
+                    onMouseLeave={(e) => { e.target.pause(); e.target.currentTime = 0; }}
+                    onClick={() => openLightbox('/images/proxim8/game-mechanics1.mp4', 'Game mechanics gameplay')}
+                  />
+                )}
               </div>
               <div style={{ padding: '24px' }}>
                 <h3 className={styles.roleTitle}>Game & Systems Design</h3>
@@ -347,17 +402,28 @@ export default function Proxim8() {
               overflow: 'hidden'
             }}>
               <div style={{ height: '140px', overflow: 'hidden', background: '#2a2a2a', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <video
-                  src="/images/proxim8/gamemaker-UI-running-clip.mp4"
-                  muted
-                  playsInline
-                  loop
-                  className={styles.clickableImage}
-                  style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-                  onMouseEnter={(e) => e.target.play()}
-                  onMouseLeave={(e) => { e.target.pause(); e.target.currentTime = 0; }}
-                  onClick={() => openLightbox('/images/proxim8/gamemaker-UI-running-clip.mp4', 'GameMaker UI running clip')}
-                />
+                {isMobile ? (
+                  <img
+                    src="/images/proxim8/gamemaker-UI-running-clip-poster.jpg"
+                    alt="GameMaker UI running clip"
+                    loading="lazy"
+                    className={styles.clickableImage}
+                    style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                    onClick={() => openLightbox('/images/proxim8/gamemaker-UI-running-clip.mp4', 'GameMaker UI running clip')}
+                  />
+                ) : (
+                  <video
+                    src="/images/proxim8/gamemaker-UI-running-clip.mp4"
+                    muted
+                    playsInline
+                    loop
+                    className={styles.clickableImage}
+                    style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                    onMouseEnter={(e) => e.target.play()}
+                    onMouseLeave={(e) => { e.target.pause(); e.target.currentTime = 0; }}
+                    onClick={() => openLightbox('/images/proxim8/gamemaker-UI-running-clip.mp4', 'GameMaker UI running clip')}
+                  />
+                )}
               </div>
               <div style={{ padding: '24px' }}>
                 <h3 className={styles.roleTitle}>Programming</h3>
@@ -387,6 +453,7 @@ export default function Proxim8() {
                 <img
                   src={artCardHovered ? '/images/proxim8/player-sprite-sheet-2.png' : '/images/proxim8/player-sprite-sheet.png'}
                   alt="Player sprite sheet"
+                  loading="lazy"
                   className={styles.clickableImage}
                   style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'opacity 0.2s' }}
                   onClick={() => openLightbox(artCardHovered ? '/images/proxim8/player-sprite-sheet-2.png' : '/images/proxim8/player-sprite-sheet.png', artCardHovered ? 'Player sprite sheet 2' : 'Player sprite sheet')}
@@ -413,17 +480,28 @@ export default function Proxim8() {
               overflow: 'hidden'
             }}>
               <div style={{ height: '140px', overflow: 'hidden' }}>
-                <video
-                  src="/images/proxim8/PROXIM8-Protocol-intro-cutscene.mp4"
-                  muted
-                  playsInline
-                  loop
-                  className={styles.clickableImage}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                  onMouseEnter={(e) => e.target.play()}
-                  onMouseLeave={(e) => { e.target.pause(); e.target.currentTime = 0; }}
-                  onClick={() => openLightbox('/images/proxim8/PROXIM8-Protocol-intro-cutscene.mp4', 'Proxim8 Protocol intro cutscene')}
-                />
+                {isMobile ? (
+                  <img
+                    src="/images/proxim8/PROXIM8-Protocol-intro-cutscene-poster.jpg"
+                    alt="Proxim8 Protocol intro cutscene"
+                    loading="lazy"
+                    className={styles.clickableImage}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    onClick={() => openLightbox('/images/proxim8/PROXIM8-Protocol-intro-cutscene.mp4', 'Proxim8 Protocol intro cutscene')}
+                  />
+                ) : (
+                  <video
+                    src="/images/proxim8/PROXIM8-Protocol-intro-cutscene.mp4"
+                    muted
+                    playsInline
+                    loop
+                    className={styles.clickableImage}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    onMouseEnter={(e) => e.target.play()}
+                    onMouseLeave={(e) => { e.target.pause(); e.target.currentTime = 0; }}
+                    onClick={() => openLightbox('/images/proxim8/PROXIM8-Protocol-intro-cutscene.mp4', 'Proxim8 Protocol intro cutscene')}
+                  />
+                )}
               </div>
               <div style={{ padding: '24px' }}>
                 <h3 className={styles.roleTitle}>Audio & Narrative</h3>
@@ -445,16 +523,26 @@ export default function Proxim8() {
       <section className={styles.sectionAccent}>
         <div className={styles.sectionInnerWide}>
           <div className={styles.sectionBanner}>
-            <video
-              src="/images/proxim8/workflow-banner.mp4"
-              muted
-              playsInline
-              loop
-              className={`${styles.sectionBannerVideo} ${styles.clickableImage}`}
-              onMouseEnter={(e) => e.target.play()}
-              onMouseLeave={(e) => { e.target.pause(); e.target.currentTime = 0; }}
-              onClick={() => openLightbox('/images/proxim8/workflow-banner.mp4', 'Human-AI Workflow')}
-            />
+            {isMobile ? (
+              <img
+                src="/images/proxim8/workflow-banner-poster.jpg"
+                alt="Human-AI Workflow"
+                loading="lazy"
+                className={`${styles.sectionBannerVideo} ${styles.clickableImage}`}
+                onClick={() => openLightbox('/images/proxim8/workflow-banner.mp4', 'Human-AI Workflow')}
+              />
+            ) : (
+              <video
+                src="/images/proxim8/workflow-banner.mp4"
+                muted
+                playsInline
+                loop
+                className={`${styles.sectionBannerVideo} ${styles.clickableImage}`}
+                onMouseEnter={(e) => e.target.play()}
+                onMouseLeave={(e) => { e.target.pause(); e.target.currentTime = 0; }}
+                onClick={() => openLightbox('/images/proxim8/workflow-banner.mp4', 'Human-AI Workflow')}
+              />
+            )}
           </div>
         </div>
         <div className={styles.sectionInner}>
@@ -476,6 +564,7 @@ export default function Proxim8() {
                 <img
                   src="/images/proxim8/workflow1-gamemaker.png"
                   alt="GameMaker learning"
+                  loading="lazy"
                   className={styles.clickableImage}
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   onClick={() => openLightbox('/images/proxim8/workflow1-gamemaker.png', 'GameMaker learning')}
@@ -497,6 +586,7 @@ export default function Proxim8() {
                 <img
                   src="/images/proxim8/workflow-code.png"
                   alt="Code generation"
+                  loading="lazy"
                   className={styles.clickableImage}
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   onClick={() => openLightbox('/images/proxim8/workflow-code.png', 'Code generation')}
@@ -518,6 +608,7 @@ export default function Proxim8() {
                 <img
                   src="/images/proxim8/drone-razorbot-enemy.jpeg"
                   alt="Sprite generation"
+                  loading="lazy"
                   className={styles.clickableImage}
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   onClick={() => openLightbox('/images/proxim8/drone-razorbot-enemy.jpeg', 'Sprite generation')}
@@ -539,6 +630,7 @@ export default function Proxim8() {
                 <img
                   src="/images/proxim8/workflow4-suno.png"
                   alt="Suno music generation"
+                  loading="lazy"
                   className={styles.clickableImage}
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   onClick={() => openLightbox('/images/proxim8/workflow4-suno.png', 'Suno music generation')}
@@ -567,6 +659,7 @@ export default function Proxim8() {
                 <img
                   src="/images/proxim8/proxim8-player-charactersheet-img.png"
                   alt="Proxim8 character sheet"
+                  loading="lazy"
                   className={`${styles.image} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/proxim8/proxim8-player-charactersheet-img.png', 'Proxim8 character design sheet')}
                 />
@@ -578,6 +671,7 @@ export default function Proxim8() {
                 <img
                   src="/images/proxim8/player-sprite-sheet.png"
                   alt="Final sprite sheet after manual adjustments"
+                  loading="lazy"
                   className={`${styles.image} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/proxim8/player-sprite-sheet.png', 'Final sprite sheet after manual adjustments')}
                 />
@@ -605,52 +699,64 @@ export default function Proxim8() {
           <div
             className={styles.sectionBanner}
             style={{ marginTop: '32px', position: 'relative' }}
-            onMouseEnter={() => setCityscapeHovered(true)}
-            onMouseLeave={() => setCityscapeHovered(false)}
+            onMouseEnter={!isMobile ? () => setCityscapeHovered(true) : undefined}
+            onMouseLeave={!isMobile ? () => setCityscapeHovered(false) : undefined}
           >
-            <video
-              ref={cityscapeVideoRef}
-              src="/images/proxim8/cityscape.mp4"
-              autoPlay
-              muted
-              playsInline
-              loop
-              className={`${styles.sectionBannerVideo} ${styles.clickableImage}`}
-              onClick={() => openLightbox('/images/proxim8/cityscape.mp4', 'Cyberpunk cityscape')}
-            />
-            {cityscapeHovered && (
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  if (cityscapePaused) {
-                    cityscapeVideoRef.current.play();
-                    setCityscapePaused(false);
-                  } else {
-                    cityscapeVideoRef.current.pause();
-                    setCityscapePaused(true);
-                  }
-                }}
-                style={{
-                  position: 'absolute',
-                  top: '50%',
-                  left: '50%',
-                  transform: 'translate(-50%, -50%)',
-                  background: 'rgba(0,0,0,0.6)',
-                  border: 'none',
-                  borderRadius: '50%',
-                  width: '60px',
-                  height: '60px',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: '#fff',
-                  fontSize: '24px',
-                  transition: 'opacity 0.2s'
-                }}
-              >
-                {cityscapePaused ? '▶' : '⏸'}
-              </button>
+            {isMobile ? (
+              <img
+                src="/images/proxim8/cityscape-poster.jpg"
+                alt="Cyberpunk cityscape"
+                loading="lazy"
+                className={`${styles.sectionBannerVideo} ${styles.clickableImage}`}
+                onClick={() => openLightbox('/images/proxim8/cityscape.mp4', 'Cyberpunk cityscape')}
+              />
+            ) : (
+              <>
+                <video
+                  ref={cityscapeVideoRef}
+                  src="/images/proxim8/cityscape.mp4"
+                  autoPlay
+                  muted
+                  playsInline
+                  loop
+                  className={`${styles.sectionBannerVideo} ${styles.clickableImage}`}
+                  onClick={() => openLightbox('/images/proxim8/cityscape.mp4', 'Cyberpunk cityscape')}
+                />
+                {cityscapeHovered && (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (cityscapePaused) {
+                        cityscapeVideoRef.current.play();
+                        setCityscapePaused(false);
+                      } else {
+                        cityscapeVideoRef.current.pause();
+                        setCityscapePaused(true);
+                      }
+                    }}
+                    style={{
+                      position: 'absolute',
+                      top: '50%',
+                      left: '50%',
+                      transform: 'translate(-50%, -50%)',
+                      background: 'rgba(0,0,0,0.6)',
+                      border: 'none',
+                      borderRadius: '50%',
+                      width: '60px',
+                      height: '60px',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: '#fff',
+                      fontSize: '24px',
+                      transition: 'opacity 0.2s'
+                    }}
+                  >
+                    {cityscapePaused ? '▶' : '⏸'}
+                  </button>
+                )}
+              </>
             )}
           </div>
         </div>
@@ -664,17 +770,28 @@ export default function Proxim8() {
             I started prototyping in Gemini Canvas for rapid layout testing, but it couldn't support pixel art — so I pivoted to GameMaker and rebuilt from scratch.
           </p>
           <div style={{ margin: '24px 0', borderRadius: '12px', overflow: 'hidden' }}>
-            <video
-              src="/images/proxim8/prototype.mp4"
-              muted
-              playsInline
-              loop
-              className={styles.clickableImage}
-              style={{ width: '100%', display: 'block', borderRadius: '12px' }}
-              onMouseEnter={(e) => e.target.play()}
-              onMouseLeave={(e) => { e.target.pause(); e.target.currentTime = 0; }}
-              onClick={() => openLightbox('/images/proxim8/prototype.mp4', 'Early prototype in Gemini Canvas')}
-            />
+            {isMobile ? (
+              <img
+                src="/images/proxim8/prototype-poster.jpg"
+                alt="Early prototype in Gemini Canvas"
+                loading="lazy"
+                className={styles.clickableImage}
+                style={{ width: '100%', display: 'block', borderRadius: '12px' }}
+                onClick={() => openLightbox('/images/proxim8/prototype.mp4', 'Early prototype in Gemini Canvas')}
+              />
+            ) : (
+              <video
+                src="/images/proxim8/prototype.mp4"
+                muted
+                playsInline
+                loop
+                className={styles.clickableImage}
+                style={{ width: '100%', display: 'block', borderRadius: '12px' }}
+                onMouseEnter={(e) => e.target.play()}
+                onMouseLeave={(e) => { e.target.pause(); e.target.currentTime = 0; }}
+                onClick={() => openLightbox('/images/proxim8/prototype.mp4', 'Early prototype in Gemini Canvas')}
+              />
+            )}
           </div>
           <p className={styles.paragraph} style={{ marginTop: '96px' }}>
             AI felt like a superpower, until it didn't. Generating pixel art sprite sheets was a major friction point: some came out great, others refused to cooperate no matter how I adjusted prompts. I ended up manually tweaking sprites in Photoshop and Aseprite, adding hours to what should have been quick.
@@ -684,6 +801,7 @@ export default function Proxim8() {
               <img
                 src="/images/proxim8/AI-pass-run.png"
                 alt="AI-generated sprite pass"
+                loading="lazy"
                 className={styles.clickableImage}
                 style={{ width: '100%', display: 'block', borderRadius: '12px' }}
                 onClick={() => openLightbox('/images/proxim8/AI-pass-run.png', 'AI-generated sprite pass')}
@@ -700,6 +818,7 @@ export default function Proxim8() {
                 <img
                   src="/images/proxim8/huneter-seeker-test.jpeg"
                   alt="Hunter seeker sprite test"
+                  loading="lazy"
                   className={styles.clickableImage}
                   style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                   onClick={() => openLightbox('/images/proxim8/huneter-seeker-test.jpeg', 'Hunter seeker sprite test')}
@@ -709,17 +828,28 @@ export default function Proxim8() {
             </div>
             <div>
               <div style={{ borderRadius: '12px', overflow: 'hidden', height: '280px' }}>
-                <video
-                  src="/images/proxim8/hunter-seeker-animation.mp4"
-                  muted
-                  playsInline
-                  loop
-                  className={styles.clickableImage}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                  onMouseEnter={(e) => e.target.play()}
-                  onMouseLeave={(e) => { e.target.pause(); e.target.currentTime = 0; }}
-                  onClick={() => openLightbox('/images/proxim8/hunter-seeker-animation.mp4', 'Hunter seeker animation')}
-                />
+                {isMobile ? (
+                  <img
+                    src="/images/proxim8/hunter-seeker-animation-poster.jpg"
+                    alt="Hunter seeker animation"
+                    loading="lazy"
+                    className={styles.clickableImage}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                    onClick={() => openLightbox('/images/proxim8/hunter-seeker-animation.mp4', 'Hunter seeker animation')}
+                  />
+                ) : (
+                  <video
+                    src="/images/proxim8/hunter-seeker-animation.mp4"
+                    muted
+                    playsInline
+                    loop
+                    className={styles.clickableImage}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                    onMouseEnter={(e) => e.target.play()}
+                    onMouseLeave={(e) => { e.target.pause(); e.target.currentTime = 0; }}
+                    onClick={() => openLightbox('/images/proxim8/hunter-seeker-animation.mp4', 'Hunter seeker animation')}
+                  />
+                )}
               </div>
               <span className={styles.imageLabel} style={{ marginTop: '8px', display: 'block' }}>Running a single sprite through VEO 3.1 produced consistent animations far more easily</span>
             </div>
@@ -729,17 +859,28 @@ export default function Proxim8() {
           </p>
           <div style={{ margin: '24px 0' }}>
             <div style={{ borderRadius: '12px', overflow: 'hidden', maxHeight: '400px' }}>
-              <video
-                src="/images/proxim8/glitch-ledge-grab.mp4"
-                muted
-                playsInline
-                loop
-                className={styles.clickableImage}
-                style={{ width: '100%', height: '400px', objectFit: 'cover', objectPosition: 'center top', display: 'block', borderRadius: '12px' }}
-                onMouseEnter={(e) => e.target.play()}
-                onMouseLeave={(e) => { e.target.pause(); e.target.currentTime = 0; }}
-                onClick={() => openLightbox('/images/proxim8/glitch-ledge-grab.mp4', 'Glitch ledge grab gameplay')}
-              />
+              {isMobile ? (
+                <img
+                  src="/images/proxim8/glitch-ledge-grab-poster.jpg"
+                  alt="Glitch ledge grab gameplay"
+                  loading="lazy"
+                  className={styles.clickableImage}
+                  style={{ width: '100%', height: '400px', objectFit: 'cover', objectPosition: 'center top', display: 'block', borderRadius: '12px' }}
+                  onClick={() => openLightbox('/images/proxim8/glitch-ledge-grab.mp4', 'Glitch ledge grab gameplay')}
+                />
+              ) : (
+                <video
+                  src="/images/proxim8/glitch-ledge-grab.mp4"
+                  muted
+                  playsInline
+                  loop
+                  className={styles.clickableImage}
+                  style={{ width: '100%', height: '400px', objectFit: 'cover', objectPosition: 'center top', display: 'block', borderRadius: '12px' }}
+                  onMouseEnter={(e) => e.target.play()}
+                  onMouseLeave={(e) => { e.target.pause(); e.target.currentTime = 0; }}
+                  onClick={() => openLightbox('/images/proxim8/glitch-ledge-grab.mp4', 'Glitch ledge grab gameplay')}
+                />
+              )}
             </div>
             <span className={styles.imageLabel} style={{ marginTop: '8px', display: 'block' }}>A recurring glitch when coding with Gemini: the sprite wouldn't grab onto ledges properly</span>
           </div>
@@ -771,6 +912,7 @@ export default function Proxim8() {
               <img
                 src="/images/proxim8/impact-highscore.png"
                 alt="High score screen"
+                loading="lazy"
                 className={styles.clickableImage}
                 onClick={() => openLightbox('/images/proxim8/impact-highscore.png', 'High score screen')}
               />
@@ -815,38 +957,55 @@ export default function Proxim8() {
           </div>
         </div>
         <div className={styles.sectionInnerWide} style={{ marginTop: '48px' }}>
-          <div
-            className={styles.sectionBanner}
-            style={{ position: 'relative', minHeight: '200px' }}
-            onMouseEnter={(e) => {
-              const video = e.currentTarget.querySelector('video');
-              const img = e.currentTarget.querySelector('img');
-              if (video) { video.style.opacity = '1'; video.play(); }
-              if (img) img.style.opacity = '0';
-            }}
-            onMouseLeave={(e) => {
-              const video = e.currentTarget.querySelector('video');
-              const img = e.currentTarget.querySelector('img');
-              if (video) { video.style.opacity = '0'; video.pause(); video.currentTime = 0; }
-              if (img) img.style.opacity = '1';
-            }}
-            onClick={() => openLightbox('/images/proxim8/takeaways.mp4', 'Key takeaways gameplay')}
-          >
-            <img
-              src="/images/proxim8/takeaways.png"
-              alt="Key takeaways"
-              className={styles.clickableImage}
-              style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 25%', position: 'absolute', top: 0, left: 0, transition: 'opacity 0.3s ease' }}
-            />
-            <video
-              src="/images/proxim8/takeaways.mp4"
-              muted
-              playsInline
-              loop
-              className={styles.clickableImage}
-              style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 25%', position: 'absolute', top: 0, left: 0, opacity: 0, transition: 'opacity 0.3s ease' }}
-            />
-          </div>
+          {isMobile ? (
+            <div
+              className={styles.sectionBanner}
+              style={{ position: 'relative', minHeight: '200px' }}
+              onClick={() => openLightbox('/images/proxim8/takeaways.mp4', 'Key takeaways gameplay')}
+            >
+              <img
+                src="/images/proxim8/takeaways.png"
+                alt="Key takeaways"
+                loading="lazy"
+                className={styles.clickableImage}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 25%', position: 'absolute', top: 0, left: 0 }}
+              />
+            </div>
+          ) : (
+            <div
+              className={styles.sectionBanner}
+              style={{ position: 'relative', minHeight: '200px' }}
+              onMouseEnter={(e) => {
+                const video = e.currentTarget.querySelector('video');
+                const img = e.currentTarget.querySelector('img');
+                if (video) { video.style.opacity = '1'; video.play(); }
+                if (img) img.style.opacity = '0';
+              }}
+              onMouseLeave={(e) => {
+                const video = e.currentTarget.querySelector('video');
+                const img = e.currentTarget.querySelector('img');
+                if (video) { video.style.opacity = '0'; video.pause(); video.currentTime = 0; }
+                if (img) img.style.opacity = '1';
+              }}
+              onClick={() => openLightbox('/images/proxim8/takeaways.mp4', 'Key takeaways gameplay')}
+            >
+              <img
+                src="/images/proxim8/takeaways.png"
+                alt="Key takeaways"
+                loading="lazy"
+                className={styles.clickableImage}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 25%', position: 'absolute', top: 0, left: 0, transition: 'opacity 0.3s ease' }}
+              />
+              <video
+                src="/images/proxim8/takeaways.mp4"
+                muted
+                playsInline
+                loop
+                className={styles.clickableImage}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 25%', position: 'absolute', top: 0, left: 0, opacity: 0, transition: 'opacity 0.3s ease' }}
+              />
+            </div>
+          )}
         </div>
       </section>
 
@@ -874,6 +1033,7 @@ export default function Proxim8() {
             <img
               src="/images/proxim8/Proxim8-Protocol-logo.png"
               alt="Proxim8 Protocol Logo"
+              loading="lazy"
               className={styles.openSourceLogo}
             />
             <h3 className={styles.openSourceTitle}>Try the Demo</h3>

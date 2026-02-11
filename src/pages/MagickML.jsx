@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styles from '../styles/caseStudy.module.css';
 import Lightbox from '../components/Lightbox';
+import useIsMobile from '../hooks/useIsMobile';
 
 export default function MagickML() {
   const [currentPitchSlide, setCurrentPitchSlide] = useState(0);
@@ -11,6 +12,7 @@ export default function MagickML() {
   const [showcaseVideoPaused, setShowcaseVideoPaused] = useState(false);
   const autoScrollRef = useRef(null);
   const showcaseVideoRef = useRef(null);
+  const isMobile = useIsMobile();
 
   const toggleShowcaseVideo = () => {
     if (showcaseVideoRef.current) {
@@ -164,6 +166,7 @@ export default function MagickML() {
             <img
               src="/images/magick/challenge-magick-maker.png"
               alt="Become a Magick Maker"
+              loading="lazy"
               className={`${styles.sectionBannerImage} ${styles.clickableImage}`}
               onClick={() => openLightbox('/images/magick/challenge-magick-maker.png', 'Become a Magick Maker')}
             />
@@ -195,6 +198,7 @@ export default function MagickML() {
                 <img
                   src="/images/magick/challenge-onboarding.png"
                   alt="Onboarding pop-up design"
+                  loading="lazy"
                   className={`${styles.imageCroppedTop} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/magick/challenge-onboarding.png', 'Onboarding pop-up design')}
                 />
@@ -224,6 +228,7 @@ export default function MagickML() {
             <img
               src="/images/magick/userflow-wireframe-overview.png"
               alt="User flow wireframe overview"
+              loading="lazy"
               className={`${styles.sectionBannerImage} ${styles.clickableImage}`}
               onClick={() => openLightbox('/images/magick/userflow-wireframe-overview.png', 'User flow wireframe overview')}
             />
@@ -247,6 +252,7 @@ export default function MagickML() {
                   <img
                     src={`/images/magick/${step.img}`}
                     alt={step.caption}
+                    loading="lazy"
                     className={`${styles.image} ${styles.clickableImage}`}
                     onClick={() => openLightbox(`/images/magick/${step.img}`, step.caption)}
                   />
@@ -301,6 +307,7 @@ export default function MagickML() {
                   <img
                     src={`/images/magick/${role.image}`}
                     alt={role.title}
+                    loading="lazy"
                     className={`${styles.roleImage} ${styles.clickableImage}`}
                     onClick={() => openLightbox(`/images/magick/${role.image}`, role.title)}
                   />
@@ -326,36 +333,51 @@ export default function MagickML() {
       <section className={styles.sectionAccent}>
         <div className={styles.sectionInnerWide}>
           <div className={styles.showcaseVideoContainer}>
-            <div
-              className={styles.showcaseVideoWrapper}
-              onClick={toggleShowcaseVideo}
-            >
-              <video
-                ref={showcaseVideoRef}
-                src="/images/magick/VIDEO-MagickML-showcase.mp4"
-                autoPlay
-                loop
-                muted
-                playsInline
-                className={styles.showcaseVideo}
-              />
+            {isMobile ? (
               <div
-                className={`${styles.showcaseVideoPlayButton} ${showcaseVideoPaused ? styles.showcaseVideoPlayButtonVisible : ''}`}
-                aria-label={showcaseVideoPaused ? 'Play video' : 'Pause video'}
+                className={styles.showcaseVideoWrapper}
+                onClick={() => openLightbox('/images/magick/VIDEO-MagickML-showcase.mp4', 'MagickML Platform Showcase')}
               >
-                {showcaseVideoPaused ? '▶' : '❚❚'}
+                <img
+                  src="/images/magick/VIDEO-MagickML-showcase-poster.jpg"
+                  alt="MagickML Platform Showcase"
+                  loading="lazy"
+                  className={styles.showcaseVideo}
+                  style={{ cursor: 'pointer' }}
+                />
               </div>
-              <button
-                className={styles.showcaseVideoFullscreenButton}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  openLightbox('/images/magick/VIDEO-MagickML-showcase.mp4', 'MagickML Platform Showcase');
-                }}
-                aria-label="View fullscreen"
+            ) : (
+              <div
+                className={styles.showcaseVideoWrapper}
+                onClick={toggleShowcaseVideo}
               >
-                ⛶
-              </button>
-            </div>
+                <video
+                  ref={showcaseVideoRef}
+                  src="/images/magick/VIDEO-MagickML-showcase.mp4"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className={styles.showcaseVideo}
+                />
+                <div
+                  className={`${styles.showcaseVideoPlayButton} ${showcaseVideoPaused ? styles.showcaseVideoPlayButtonVisible : ''}`}
+                  aria-label={showcaseVideoPaused ? 'Play video' : 'Pause video'}
+                >
+                  {showcaseVideoPaused ? '▶' : '❚❚'}
+                </div>
+                <button
+                  className={styles.showcaseVideoFullscreenButton}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    openLightbox('/images/magick/VIDEO-MagickML-showcase.mp4', 'MagickML Platform Showcase');
+                  }}
+                  aria-label="View fullscreen"
+                >
+                  ⛶
+                </button>
+              </div>
+            )}
           </div>
         </div>
         <div className={styles.sectionInner}>
@@ -371,6 +393,7 @@ export default function MagickML() {
                 <img
                   src="/images/magick/marketing-landing-page.png"
                   alt="Marketing landing page"
+                  loading="lazy"
                   className={`${styles.builtItemImage} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/magick/marketing-landing-page.png', 'Marketing landing page')}
                 />
@@ -385,6 +408,7 @@ export default function MagickML() {
                 <img
                   src="/images/magick/portal-screenshot.png"
                   alt="User portal dashboard"
+                  loading="lazy"
                   className={`${styles.builtItemImage} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/magick/portal-screenshot.png', 'User portal dashboard')}
                 />
@@ -399,6 +423,7 @@ export default function MagickML() {
                 <img
                   src="/images/magick/graph-banner.png"
                   alt="AIDE builder interface"
+                  loading="lazy"
                   className={`${styles.builtItemImageCentered} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/magick/graph-banner.png', 'AIDE builder interface')}
                 />
@@ -428,6 +453,7 @@ export default function MagickML() {
                 <img
                   src="/images/magick/thoth-AIDEconcept0.png"
                   alt="Early functional design concept"
+                  loading="lazy"
                   className={`${styles.evolutionImage} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/magick/thoth-AIDEconcept0.png', 'Early functional design concept')}
                 />
@@ -440,6 +466,7 @@ export default function MagickML() {
                 <img
                   src="/images/magick/graph-visual-IDE-Design-Concept.png"
                   alt="Neon design exploration"
+                  loading="lazy"
                   className={`${styles.evolutionImage} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/magick/graph-visual-IDE-Design-Concept.png', 'Neon design exploration')}
                 />
@@ -452,6 +479,7 @@ export default function MagickML() {
                 <img
                   src="/images/magick/graph-visual-for a dungeon-adventure-agent.png"
                   alt="Final refined design"
+                  loading="lazy"
                   className={`${styles.evolutionImage} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/magick/graph-visual-for a dungeon-adventure-agent.png', 'Final refined design')}
                 />
@@ -478,6 +506,7 @@ export default function MagickML() {
                 <img
                   src="/images/magick/wireframe-template-iteration-1.png"
                   alt="Wireframe iteration 1"
+                  loading="lazy"
                   className={`${styles.progressionImage} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/magick/wireframe-template-iteration-1.png', 'B&W concept wireframe')}
                 />
@@ -490,6 +519,7 @@ export default function MagickML() {
                 <img
                   src="/images/magick/wireframe-template-iteration-2.png"
                   alt="Wireframe iteration 2"
+                  loading="lazy"
                   className={`${styles.progressionImage} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/magick/wireframe-template-iteration-2.png', 'First color pass')}
                 />
@@ -502,6 +532,7 @@ export default function MagickML() {
                 <img
                   src="/images/magick/wireframe-template-iteration-3.png"
                   alt="Wireframe iteration 3"
+                  loading="lazy"
                   className={`${styles.progressionImage} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/magick/wireframe-template-iteration-3.png', 'MVP hi-fi concept')}
                 />
@@ -514,6 +545,7 @@ export default function MagickML() {
                 <img
                   src="/images/magick/wireframe-template-iteration-4.png"
                   alt="Wireframe iteration 4"
+                  loading="lazy"
                   className={`${styles.progressionImage} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/magick/wireframe-template-iteration-4.png', 'Final design')}
                 />
@@ -538,6 +570,7 @@ export default function MagickML() {
               <img
                 src={designSystemImages[currentDesignSlide]}
                 alt={`Design system example ${currentDesignSlide + 1}`}
+                loading="lazy"
                 className={styles.carouselImage}
                 onClick={() => openLightbox(designSystemImages[currentDesignSlide], `Design system example ${currentDesignSlide + 1}`)}
               />
@@ -602,6 +635,7 @@ export default function MagickML() {
             <img
               src="/images/magick/marketing-magick-banner-top.png"
               alt="Magick marketing materials"
+              loading="lazy"
               className={`${styles.sectionBannerImage} ${styles.clickableImage}`}
               onClick={() => openLightbox('/images/magick/marketing-magick-banner-top.png', 'Magick marketing materials')}
             />
@@ -631,6 +665,7 @@ export default function MagickML() {
             <img
               src="/images/magick/marketing-magick-banner-bottom.png"
               alt="Magick marketing examples"
+              loading="lazy"
               className={`${styles.sectionBannerImage} ${styles.clickableImage}`}
               onClick={() => openLightbox('/images/magick/marketing-magick-banner-bottom.png', 'Magick marketing examples')}
             />
@@ -649,6 +684,7 @@ export default function MagickML() {
               <img
                 src={pitchDeckSlides[currentPitchSlide]}
                 alt={`Pitch deck slide ${currentPitchSlide + 1}`}
+                loading="lazy"
                 className={styles.carouselImage}
                 onClick={() => openLightbox(pitchDeckSlides[currentPitchSlide], `Pitch deck slide ${currentPitchSlide + 1}`)}
               />
@@ -692,6 +728,7 @@ export default function MagickML() {
             <img
               src="/images/magick/pitch-deck-history.png"
               alt="Three earlier versions of the pitch deck cover slide"
+              loading="lazy"
               className={`${styles.pitchDeckHistoryImage} ${styles.clickableImage}`}
               onClick={() => openLightbox('/images/magick/pitch-deck-history.png', 'Evolution of pitch deck designs across multiple versions')}
             />
@@ -750,6 +787,7 @@ export default function MagickML() {
             <img
               src="/images/magick/userflow-overview.png"
               alt="Comprehensive user flow overview showing the full product journey"
+              loading="lazy"
               className={`${styles.reflectionImage} ${styles.clickableImage}`}
               onClick={() => openLightbox('/images/magick/userflow-overview.png', 'Comprehensive user flow overview showing the full product journey')}
             />
@@ -775,6 +813,7 @@ export default function MagickML() {
             <img
               src="/images/magick/Banner-light.png"
               alt="Magick ML Logo"
+              loading="lazy"
               className={styles.openSourceLogo}
             />
             <h3 className={styles.openSourceTitle}>Open Source Project</h3>

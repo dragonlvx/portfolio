@@ -135,6 +135,7 @@ export default function Extras() {
           <img
             src={images[0].src}
             alt={images[0].alt}
+            loading="lazy"
             className={styles.projectImg}
             style={{ maxWidth: '600px', maxHeight: '289px', width: '100%', height: 'auto', margin: '0 auto' }}
             onClick={() => openLightbox(images[0].src, images[0].alt)}
@@ -152,6 +153,7 @@ export default function Extras() {
               <img
                 src={img.src}
                 alt={img.alt}
+                loading="lazy"
                 className={styles.projectImg}
                 style={img.contain ? { objectFit: 'contain', padding: '16px', background: '#f0efed' } : {}}
                 onClick={() => openLightbox(img.src, img.alt)}
@@ -173,6 +175,7 @@ export default function Extras() {
               <img
                 src={img.src}
                 alt={img.alt}
+                loading="lazy"
                 className={styles.projectImg}
                 style={{
                   ...(img.contain ? { objectFit: 'contain', padding: '16px', background: img.background || '#f0efed' } : {}),
@@ -193,6 +196,7 @@ export default function Extras() {
           <img
             src={images[0].src}
             alt={images[0].alt}
+            loading="lazy"
             className={styles.projectImg}
             style={images[0].contain ? { objectFit: 'contain', padding: '24px', background: '#f0efed' } : {}}
             onClick={() => openLightbox(images[0].src, images[0].alt)}
@@ -209,6 +213,7 @@ export default function Extras() {
               <img
                 src={img.src}
                 alt={img.alt}
+                loading="lazy"
                 className={styles.projectImg}
                 style={img.contain ? { objectFit: 'contain', padding: '16px', background: '#f0efed' } : {}}
                 onClick={() => openLightbox(img.src, img.alt)}
@@ -226,6 +231,7 @@ export default function Extras() {
             <img
               src={images[0].src}
               alt={images[0].alt}
+              loading="lazy"
               className={styles.projectImg}
               style={images[0].contain ? { objectFit: 'contain', padding: '24px', background: '#f0efed' } : {}}
               onClick={() => openLightbox(images[0].src, images[0].alt)}
@@ -237,6 +243,7 @@ export default function Extras() {
                 <img
                   src={img.src}
                   alt={img.alt}
+                  loading="lazy"
                   className={styles.projectImg}
                   style={img.contain ? { objectFit: 'contain', padding: '16px', background: '#f0efed' } : {}}
                   onClick={() => openLightbox(img.src, img.alt)}
@@ -256,6 +263,7 @@ export default function Extras() {
             <img
               src={img.src}
               alt={img.alt}
+              loading="lazy"
               className={styles.projectImg}
               style={{
                 ...(img.contain ? { objectFit: 'contain', padding: '16px', background: '#f0efed' } : {}),

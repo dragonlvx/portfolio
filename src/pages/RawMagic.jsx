@@ -109,6 +109,7 @@ export default function RawMagic() {
             <img
               src="/images/rawmagic/products-7.JPG"
               alt="Raw Magic Chocolate Products"
+              loading="lazy"
               className={`${styles.sectionBannerImage} ${styles.clickableImage}`}
               onClick={() => openLightbox('/images/rawmagic/products-7.JPG', 'Raw Magic Chocolate Products')}
             />
@@ -139,6 +140,7 @@ export default function RawMagic() {
             <img
               src="/images/rawmagic/products-cart.JPG"
               alt="Raw Magic Chocolate Products Display"
+              loading="lazy"
               className={`${styles.sectionBannerImage} ${styles.clickableImage}`}
               onClick={() => openLightbox('/images/rawmagic/products-cart.JPG', 'Raw Magic Chocolate Products Display')}
             />
@@ -189,6 +191,7 @@ export default function RawMagic() {
                   <img
                     src={role.image}
                     alt={role.title}
+                    loading="lazy"
                     className={`${styles.roleCardImg} ${styles.clickableImage}`}
                     onClick={() => openLightbox(role.image, role.title)}
                   />
@@ -217,6 +220,7 @@ export default function RawMagic() {
             <img
               src="/images/rawmagic/header-cauldron.png"
               alt="Raw Magic Chocolate Packaging"
+              loading="lazy"
               className={`${styles.sectionBannerImage} ${styles.clickableImage}`}
               onClick={() => openLightbox('/images/rawmagic/header-cauldron.png', 'Raw Magic Chocolate Packaging')}
             />
@@ -234,6 +238,7 @@ export default function RawMagic() {
                 <img
                   src="/images/rawmagic/bar-label-front.webp"
                   alt="Bar label front design"
+                  loading="lazy"
                   className={`${styles.image} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/rawmagic/bar-label-front.webp', 'Front layouts with bold colors and archetypal artwork')}
                 />
@@ -245,6 +250,7 @@ export default function RawMagic() {
                 <img
                   src="/images/rawmagic/bar-label-back.webp"
                   alt="Bar label back design"
+                  loading="lazy"
                   className={`${styles.image} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/rawmagic/bar-label-back.webp', 'Back wrapper layout with typography and ingredient system')}
                 />
@@ -257,6 +263,7 @@ export default function RawMagic() {
             <img
               src="/images/rawmagic/4flavours-Product-label-designs.webp"
               alt="Four flavors product label designs"
+              loading="lazy"
               className={`${styles.image} ${styles.clickableImage}`}
               style={{ width: '100%' }}
               onClick={() => openLightbox('/images/rawmagic/4flavours-Product-label-designs.webp', 'Four flavors product label designs')}
@@ -289,6 +296,7 @@ export default function RawMagic() {
             <img
               src="/images/rawmagic/4-custom-icons.png"
               alt="Custom seal icons"
+              loading="lazy"
               className={`${styles.image} ${styles.clickableImage}`}
               style={{ width: '100%' }}
               onClick={() => openLightbox('/images/rawmagic/4-custom-icons.png', 'Circular symbolic seals: raw, paleo, honey-sweetened, energetic')}
@@ -317,6 +325,7 @@ export default function RawMagic() {
                 <img
                   src="/images/rawmagic/products-old.JPG"
                   alt="Raw Dragon Chocolate Alchemy — before rebrand"
+                  loading="lazy"
                   className={`${styles.image} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/rawmagic/products-old.JPG', 'Raw Dragon Chocolate Alchemy \u2014 before rebrand')}
                 />
@@ -328,6 +337,7 @@ export default function RawMagic() {
                 <img
                   src="/images/rawmagic/products-new.png"
                   alt="Raw Magic Chocolate — after rebrand"
+                  loading="lazy"
                   className={`${styles.image} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/rawmagic/products-new.png', 'Raw Magic Chocolate \u2014 after rebrand')}
                 />
@@ -359,6 +369,7 @@ export default function RawMagic() {
                 <img
                   src={img.src}
                   alt={img.alt}
+                  loading="lazy"
                   className={`${styles.image} ${styles.clickableImage}`}
                   style={{ width: '100%', height: '250px', objectFit: 'cover' }}
                   onClick={() => openLightbox(img.src, img.alt)}
@@ -383,6 +394,7 @@ export default function RawMagic() {
                 <img
                   src="/images/rawmagic/bar-mold-concept.webp"
                   alt="Bar mold concept"
+                  loading="lazy"
                   className={`${styles.image} ${styles.clickableImage}`}
                   style={{ height: '100%', objectFit: 'cover' }}
                   onClick={() => openLightbox('/images/rawmagic/bar-mold-concept.webp', 'CAD design of chocolate bar mold')}
@@ -392,6 +404,7 @@ export default function RawMagic() {
                 <img
                   src="/images/rawmagic/barmold-concept.jpg"
                   alt="Bar mold concept detail"
+                  loading="lazy"
                   className={`${styles.image} ${styles.clickableImage}`}
                   style={{ height: '100%', objectFit: 'cover' }}
                   onClick={() => openLightbox('/images/rawmagic/barmold-concept.jpg', 'Chocolate bar mold concept detail')}
@@ -404,6 +417,7 @@ export default function RawMagic() {
                 <img
                   src="/images/rawmagic/new-bar-mold-pic.webp"
                   alt="Finished chocolate bars"
+                  loading="lazy"
                   className={`${styles.image} ${styles.clickableImage}`}
                   style={{ height: '100%', objectFit: 'cover' }}
                   onClick={() => openLightbox('/images/rawmagic/new-bar-mold-pic.webp', 'Finished chocolate bars from custom mold')}
@@ -435,6 +449,7 @@ export default function RawMagic() {
             <img
               src="/images/rawmagic/header-pour.png"
               alt="Raw Magic Chocolate experiential design"
+              loading="lazy"
               className={`${styles.sectionBannerImage} ${styles.clickableImage}`}
               style={{ objectFit: 'contain', height: 'auto' }}
               onClick={() => openLightbox('/images/rawmagic/header-pour.png', 'Raw Magic Chocolate experiential design')}
@@ -451,6 +466,7 @@ export default function RawMagic() {
             <img
               src="/images/rawmagic/experience-fortune-banner.png"
               alt="Fortune cards inside Raw Magic chocolate bars"
+              loading="lazy"
               className={`${styles.sectionBannerImage} ${styles.clickableImage}`}
               style={{ objectFit: 'contain', height: 'auto' }}
               onClick={() => openLightbox('/images/rawmagic/experience-fortune-square.JPG', 'Fortune cards inside Raw Magic chocolate bars')}
@@ -466,6 +482,7 @@ export default function RawMagic() {
                 <img
                   src="/images/rawmagic/castle-box-w-dimensions-design.webp"
                   alt="Castle box with dimensions"
+                  loading="lazy"
                   className={`${styles.image} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/rawmagic/castle-box-w-dimensions-design.webp', 'Display box with production dimensions')}
                 />
@@ -477,6 +494,7 @@ export default function RawMagic() {
                 <img
                   src="/images/rawmagic/castle-box.webp"
                   alt="Castle display box"
+                  loading="lazy"
                   className={`${styles.image} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/rawmagic/castle-box.webp', 'Castle-style retail display box')}
                 />
@@ -499,6 +517,7 @@ export default function RawMagic() {
                 <img
                   src="/images/rawmagic/experience-halloween2.JPG"
                   alt="Halloween seasonal product"
+                  loading="lazy"
                   className={`${styles.image} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/rawmagic/experience-halloween2.JPG', 'Halloween seasonal product')}
                 />
@@ -510,6 +529,7 @@ export default function RawMagic() {
                 <img
                   src="/images/rawmagic/experience-yule.png"
                   alt="Yule seasonal product"
+                  loading="lazy"
                   className={`${styles.image} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/rawmagic/experience-yule.png', 'Yule seasonal product')}
                 />
@@ -528,6 +548,7 @@ export default function RawMagic() {
             <img
               src="/images/rawmagic/header-products.png"
               alt="Raw Magic Chocolate products packaged and ready for shipping"
+              loading="lazy"
               className={`${styles.sectionBannerImage} ${styles.clickableImage}`}
               onClick={() => openLightbox('/images/rawmagic/header-products.png', 'Raw Magic Chocolate products packaged and ready for shipping')}
             />
@@ -572,6 +593,7 @@ export default function RawMagic() {
             <img
               src="/images/rawmagic/raw-magic-wordmark-logo.webp"
               alt="Raw Magic Chocolate Logo"
+              loading="lazy"
               className={styles.openSourceLogo}
               style={{ width: '289px', maxWidth: '289px' }}
             />

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './Home.module.css';
+import useIsMobile from '../hooks/useIsMobile';
 
 const projects = [
   {
@@ -41,9 +42,9 @@ export default function Home() {
   const navigate = useNavigate();
   const [hoveredCard, setHoveredCard] = useState(null);
   const [tappedCard, setTappedCard] = useState(null);
+  const isMobile = useIsMobile();
 
   const handleCardInteraction = (project, e) => {
-    const isMobile = window.innerWidth <= 768;
     if (isMobile) {
       e.preventDefault();
       if (tappedCard === project.id) {
