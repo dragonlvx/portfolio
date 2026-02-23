@@ -88,6 +88,11 @@ export default function Home() {
             <br className={styles.desktopBreak} />
             <span className={styles.introLine2}>I design experiences that blend AI, UX, game mechanics, and storytelling into products people love.</span>
           </p>
+          <div className={styles.credentials}>
+            {['B.A. Psychology', 'AI-Native Design', 'Co-Founded 2 AI Startups', '14+ Years Design'].map((cred, i) => (
+              <span key={i} className={styles.credentialPill}>{cred}</span>
+            ))}
+          </div>
         </div>
       </header>
 

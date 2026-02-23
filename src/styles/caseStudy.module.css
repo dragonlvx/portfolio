@@ -1793,6 +1793,20 @@
   margin-bottom: 24px;
 }
 
+/* Google I/O Feature Image */
+.googleIoImageContainer {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+  margin-top: 32px;
+}
+
+.googleIoImage {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .reflectionImageContainer {
   border-radius: 12px;
   overflow: hidden;

@@ -93,6 +93,8 @@ export default function MagickML() {
     ...pitchDeckSlides.map((src, i) => ({ src, alt: `Pitch deck slide ${i + 1}`, isVideo: false, label: 'Strategy & Leadership' })),
     // Strategy & Leadership - Pitch Deck History
     { src: '/images/magick/pitch-deck-history.png', alt: 'Evolution of pitch deck designs across multiple versions', isVideo: false, label: 'Strategy & Leadership' },
+    // Google I/O Recognition
+    { src: '/images/magick/google-io-magick.jpg', alt: 'Magick ML featured at Google I/O 2023', isVideo: false, label: 'Industry Recognition' },
     // Impact & Learnings
     { src: '/images/magick/userflow-overview.png', alt: 'Comprehensive user flow overview showing the full product journey', isVideo: false, label: 'Impact & Learnings' },
   ];
@@ -733,6 +735,28 @@ export default function MagickML() {
               onClick={() => openLightbox('/images/magick/pitch-deck-history.png', 'Evolution of pitch deck designs across multiple versions')}
             />
             <span className={styles.imageLabelLight}>Evolution of pitch deck designs across multiple versions</span>
+          </div>
+        </div>
+      </section>
+
+      {/* Google I/O Recognition */}
+      <section className={styles.sectionAlt}>
+        <div className={styles.sectionInner}>
+          <span className={styles.badgeLight}>Industry Recognition</span>
+          <h2 className={styles.sectionTitle}>Featured at Google I/O 2023</h2>
+          <p className={styles.paragraph}>
+            Google highlighted Magick ML alongside companies like LangChain, Chroma, and Vercel as a PaLM API partner during their I/O 2023 developer conference — validating the platform's position in the emerging AI tooling ecosystem.
+          </p>
+        </div>
+        <div className={styles.sectionInnerWide}>
+          <div className={styles.googleIoImageContainer}>
+            <img
+              src="/images/magick/google-io-magick.jpg"
+              alt="Magick ML featured on stage at Google I/O 2023 alongside LangChain, Chroma, and Vercel"
+              loading="lazy"
+              className={`${styles.googleIoImage} ${styles.clickableImage}`}
+              onClick={() => openLightbox('/images/magick/google-io-magick.jpg', 'Magick ML featured at Google I/O 2023')}
+            />
           </div>
         </div>
       </section>
