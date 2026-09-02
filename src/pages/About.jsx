@@ -24,7 +24,7 @@ export default function About() {
             <h2 className={styles.aboutHeading}>What I Bring</h2>
             <div className={styles.highlightGrid}>
               {[
-                { icon: '◈', label: 'AI Startups', detail: 'Co-founded 2 AI startups. Led product design, built design systems from scratch.' },
+                { icon: '◈', label: 'AI Startups', detail: 'Co-founded 3 AI startups. Led product design, built design systems from scratch.' },
                 { icon: '◈', label: 'AI Fluency Since 2022', detail: 'Daily generative AI usage since before ChatGPT — in production, not just experiments.' },
                 { icon: '◈', label: 'AI-Native UX', detail: 'Designing interfaces for complex AI systems with a deep understanding of the technology.' },
                 { icon: '◈', label: 'Design Craft & Tools', detail: 'Illustrator, Photoshop, Premiere Pro, Figma, Google Workspace. Strong typographic and layout foundations.' },
