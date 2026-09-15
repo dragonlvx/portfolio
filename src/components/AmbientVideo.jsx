@@ -5,8 +5,7 @@ export default function AmbientVideo({ className, src, poster, label, decorative
   const video = useRef(null);
   const [playing, setPlaying] = useState(false);
   const reducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
-  const mobile = useMediaQuery('(max-width: 768px)');
-  const shouldPlay = !reducedMotion && !(decorative && mobile);
+  const shouldPlay = !reducedMotion;
 
   useEffect(() => {
     if (shouldPlay) video.current?.play().catch(() => {});

@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import ProductionEvidence from '../components/ProductionEvidence';
 import CopyEmail from '../components/CopyEmail';
 import AmbientVideo from '../components/AmbientVideo';
 import styles from './Film.module.css';
@@ -365,6 +366,7 @@ function ProjectCard({ project, onOpen }) {
                   <p className={styles.caseBody}>{section.body}</p>
                 </div>
               ))}
+              {expanded && <ProductionEvidence projectId={project.id} />}
               {project.id === 'project89-trailer' && (
                 <p className={styles.caseBody}>
                   Explore the wider story world, production workflows, and community tutorials in the{' '}
