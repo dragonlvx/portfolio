@@ -1,3 +1,4 @@
+import { activateMediaOnKey, focusMediaTrigger } from '../components/mediaKeyboard';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from '../styles/caseStudy.module.css';
@@ -58,7 +59,7 @@ export default function RawMagic() {
   const currentImage = lightboxIndex !== null ? allLightboxItems[lightboxIndex] : null;
 
   return (
-    <main className={styles.main}>
+    <div className={styles.main}>
       {/* Hero Section */}
       <section className={styles.hero}>
         <div className={styles.heroImageContainer}>
@@ -112,6 +113,11 @@ export default function RawMagic() {
               loading="lazy"
               className={`${styles.sectionBannerImage} ${styles.clickableImage}`}
               onClick={() => openLightbox('/images/rawmagic/products-7.JPG', 'Raw Magic Chocolate Products')}
+             role="button"
+             tabIndex={0}
+             onKeyDown={activateMediaOnKey}
+             onPointerDown={focusMediaTrigger}
+             aria-label="Raw Magic Chocolate Products"
             />
           </div>
         </div>
@@ -143,6 +149,11 @@ export default function RawMagic() {
               loading="lazy"
               className={`${styles.sectionBannerImage} ${styles.clickableImage}`}
               onClick={() => openLightbox('/images/rawmagic/products-cart.JPG', 'Raw Magic Chocolate Products Display')}
+             role="button"
+             tabIndex={0}
+             onKeyDown={activateMediaOnKey}
+             onPointerDown={focusMediaTrigger}
+             aria-label="Raw Magic Chocolate Products Display"
             />
           </div>
         </div>
@@ -194,6 +205,11 @@ export default function RawMagic() {
                     loading="lazy"
                     className={`${styles.roleCardImg} ${styles.clickableImage}`}
                     onClick={() => openLightbox(role.image, role.title)}
+                   role="button"
+                   tabIndex={0}
+                   onKeyDown={activateMediaOnKey}
+                   onPointerDown={focusMediaTrigger}
+                   aria-label={role.title}
                   />
                 </div>
                 <div className={styles.roleCardContent}>
@@ -223,6 +239,11 @@ export default function RawMagic() {
               loading="lazy"
               className={`${styles.sectionBannerImage} ${styles.clickableImage}`}
               onClick={() => openLightbox('/images/rawmagic/header-cauldron.png', 'Raw Magic Chocolate Packaging')}
+             role="button"
+             tabIndex={0}
+             onKeyDown={activateMediaOnKey}
+             onPointerDown={focusMediaTrigger}
+             aria-label="Raw Magic Chocolate Packaging"
             />
           </div>
         </div>
@@ -241,6 +262,11 @@ export default function RawMagic() {
                   loading="lazy"
                   className={`${styles.image} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/rawmagic/bar-label-front.webp', 'Front layouts with bold colors and archetypal artwork')}
+                 role="button"
+                 tabIndex={0}
+                 onKeyDown={activateMediaOnKey}
+                 onPointerDown={focusMediaTrigger}
+                 aria-label="Bar label front design"
                 />
               </div>
               <span className={styles.imageLabel}>Front layouts with bold colors and archetypal artwork</span>
@@ -253,6 +279,11 @@ export default function RawMagic() {
                   loading="lazy"
                   className={`${styles.image} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/rawmagic/bar-label-back.webp', 'Back wrapper layout with typography and ingredient system')}
+                 role="button"
+                 tabIndex={0}
+                 onKeyDown={activateMediaOnKey}
+                 onPointerDown={focusMediaTrigger}
+                 aria-label="Bar label back design"
                 />
               </div>
               <span className={styles.imageLabel}>Back wrapper layout with typography and ingredient system</span>
@@ -267,6 +298,11 @@ export default function RawMagic() {
               className={`${styles.image} ${styles.clickableImage}`}
               style={{ width: '100%' }}
               onClick={() => openLightbox('/images/rawmagic/4flavours-Product-label-designs.webp', 'Four flavors product label designs')}
+             role="button"
+             tabIndex={0}
+             onKeyDown={activateMediaOnKey}
+             onPointerDown={focusMediaTrigger}
+             aria-label="Four flavors product label designs"
             />
           </div>
 
@@ -300,6 +336,11 @@ export default function RawMagic() {
               className={`${styles.image} ${styles.clickableImage}`}
               style={{ width: '100%' }}
               onClick={() => openLightbox('/images/rawmagic/4-custom-icons.png', 'Circular symbolic seals: raw, paleo, honey-sweetened, energetic')}
+             role="button"
+             tabIndex={0}
+             onKeyDown={activateMediaOnKey}
+             onPointerDown={focusMediaTrigger}
+             aria-label="Custom seal icons"
             />
           </div>
 
@@ -328,6 +369,11 @@ export default function RawMagic() {
                   loading="lazy"
                   className={`${styles.image} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/rawmagic/products-old.JPG', 'Raw Dragon Chocolate Alchemy \u2014 before rebrand')}
+                 role="button"
+                 tabIndex={0}
+                 onKeyDown={activateMediaOnKey}
+                 onPointerDown={focusMediaTrigger}
+                 aria-label="Raw Dragon Chocolate Alchemy — before rebrand"
                 />
               </div>
               <span className={styles.imageLabel}>Before — Raw Dragon Chocolate Alchemy</span>
@@ -340,6 +386,11 @@ export default function RawMagic() {
                   loading="lazy"
                   className={`${styles.image} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/rawmagic/products-new.png', 'Raw Magic Chocolate \u2014 after rebrand')}
+                 role="button"
+                 tabIndex={0}
+                 onKeyDown={activateMediaOnKey}
+                 onPointerDown={focusMediaTrigger}
+                 aria-label="Raw Magic Chocolate — after rebrand"
                 />
               </div>
               <span className={styles.imageLabel}>After — Raw Magic Chocolate</span>
@@ -373,6 +424,11 @@ export default function RawMagic() {
                   className={`${styles.image} ${styles.clickableImage}`}
                   style={{ width: '100%', height: '250px', objectFit: 'cover' }}
                   onClick={() => openLightbox(img.src, img.alt)}
+                 role="button"
+                 tabIndex={0}
+                 onKeyDown={activateMediaOnKey}
+                 onPointerDown={focusMediaTrigger}
+                 aria-label={img.alt}
                 />
               </div>
             ))}
@@ -398,6 +454,11 @@ export default function RawMagic() {
                   className={`${styles.image} ${styles.clickableImage}`}
                   style={{ height: '100%', objectFit: 'cover' }}
                   onClick={() => openLightbox('/images/rawmagic/bar-mold-concept.webp', 'CAD design of chocolate bar mold')}
+                 role="button"
+                 tabIndex={0}
+                 onKeyDown={activateMediaOnKey}
+                 onPointerDown={focusMediaTrigger}
+                 aria-label="Bar mold concept"
                 />
               </div>
               <div className={styles.imageContainer} style={{ flex: 1 }}>
@@ -408,6 +469,11 @@ export default function RawMagic() {
                   className={`${styles.image} ${styles.clickableImage}`}
                   style={{ height: '100%', objectFit: 'cover' }}
                   onClick={() => openLightbox('/images/rawmagic/barmold-concept.jpg', 'Chocolate bar mold concept detail')}
+                 role="button"
+                 tabIndex={0}
+                 onKeyDown={activateMediaOnKey}
+                 onPointerDown={focusMediaTrigger}
+                 aria-label="Bar mold concept detail"
                 />
               </div>
               <span className={styles.imageLabel}>CAD design and concept for chocolate bar mold</span>
@@ -421,6 +487,11 @@ export default function RawMagic() {
                   className={`${styles.image} ${styles.clickableImage}`}
                   style={{ height: '100%', objectFit: 'cover' }}
                   onClick={() => openLightbox('/images/rawmagic/new-bar-mold-pic.webp', 'Finished chocolate bars from custom mold')}
+                 role="button"
+                 tabIndex={0}
+                 onKeyDown={activateMediaOnKey}
+                 onPointerDown={focusMediaTrigger}
+                 aria-label="Finished chocolate bars"
                 />
               </div>
               <span className={styles.imageLabel}>Finished chocolate bars from custom mold</span>
@@ -453,6 +524,11 @@ export default function RawMagic() {
               className={`${styles.sectionBannerImage} ${styles.clickableImage}`}
               style={{ objectFit: 'contain', height: 'auto' }}
               onClick={() => openLightbox('/images/rawmagic/header-pour.png', 'Raw Magic Chocolate experiential design')}
+             role="button"
+             tabIndex={0}
+             onKeyDown={activateMediaOnKey}
+             onPointerDown={focusMediaTrigger}
+             aria-label="Raw Magic Chocolate experiential design"
             />
           </div>
         </div>
@@ -470,6 +546,11 @@ export default function RawMagic() {
               className={`${styles.sectionBannerImage} ${styles.clickableImage}`}
               style={{ objectFit: 'contain', height: 'auto' }}
               onClick={() => openLightbox('/images/rawmagic/experience-fortune-square.JPG', 'Fortune cards inside Raw Magic chocolate bars')}
+             role="button"
+             tabIndex={0}
+             onKeyDown={activateMediaOnKey}
+             onPointerDown={focusMediaTrigger}
+             aria-label="Fortune cards inside Raw Magic chocolate bars"
             />
           </div>
           <p className={styles.paragraphLight} style={{ fontSize: '14px', marginTop: '-16px', marginBottom: '32px', color: 'rgba(255,255,255,0.6)', textAlign: 'center' }}>
@@ -485,6 +566,11 @@ export default function RawMagic() {
                   loading="lazy"
                   className={`${styles.image} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/rawmagic/castle-box-w-dimensions-design.webp', 'Display box with production dimensions')}
+                 role="button"
+                 tabIndex={0}
+                 onKeyDown={activateMediaOnKey}
+                 onPointerDown={focusMediaTrigger}
+                 aria-label="Castle box with dimensions"
                 />
               </div>
               <span className={styles.imageLabel} style={{ color: 'rgba(255,255,255,0.7)' }}>Display box with production dimensions</span>
@@ -497,6 +583,11 @@ export default function RawMagic() {
                   loading="lazy"
                   className={`${styles.image} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/rawmagic/castle-box.webp', 'Castle-style retail display box')}
+                 role="button"
+                 tabIndex={0}
+                 onKeyDown={activateMediaOnKey}
+                 onPointerDown={focusMediaTrigger}
+                 aria-label="Castle display box"
                 />
               </div>
               <span className={styles.imageLabel} style={{ color: 'rgba(255,255,255,0.7)' }}>Castle-style retail display box</span>
@@ -520,6 +611,11 @@ export default function RawMagic() {
                   loading="lazy"
                   className={`${styles.image} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/rawmagic/experience-halloween2.JPG', 'Halloween seasonal product')}
+                 role="button"
+                 tabIndex={0}
+                 onKeyDown={activateMediaOnKey}
+                 onPointerDown={focusMediaTrigger}
+                 aria-label="Halloween seasonal product"
                 />
               </div>
               <span className={styles.imageLabel} style={{ color: 'rgba(255,255,255,0.7)' }}>Halloween limited edition</span>
@@ -532,6 +628,11 @@ export default function RawMagic() {
                   loading="lazy"
                   className={`${styles.image} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/rawmagic/experience-yule.png', 'Yule seasonal product')}
+                 role="button"
+                 tabIndex={0}
+                 onKeyDown={activateMediaOnKey}
+                 onPointerDown={focusMediaTrigger}
+                 aria-label="Yule seasonal product"
                 />
               </div>
               <span className={styles.imageLabel} style={{ color: 'rgba(255,255,255,0.7)' }}>Yule holiday edition</span>
@@ -551,6 +652,11 @@ export default function RawMagic() {
               loading="lazy"
               className={`${styles.sectionBannerImage} ${styles.clickableImage}`}
               onClick={() => openLightbox('/images/rawmagic/header-products.png', 'Raw Magic Chocolate products packaged and ready for shipping')}
+             role="button"
+             tabIndex={0}
+             onKeyDown={activateMediaOnKey}
+             onPointerDown={focusMediaTrigger}
+             aria-label="Raw Magic Chocolate products packaged and ready for shipping"
             />
           </div>
         </div>
@@ -629,7 +735,7 @@ export default function RawMagic() {
               → View Gamemaker Demo
             </Link>
           </div>
-          <Link to="/" className={styles.backLink}>
+          <Link to="/ux" className={styles.backLink}>
             ← Back to Work
           </Link>
         </div>
@@ -646,6 +752,6 @@ export default function RawMagic() {
           label={currentImage.label}
         />
       )}
-    </main>
+    </div>
   );
 }

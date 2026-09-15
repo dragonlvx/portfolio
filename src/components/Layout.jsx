@@ -1,40 +1,37 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styles from './Layout.module.css';
+import CopyEmail from './CopyEmail';
 import useIsMobile from '../hooks/useIsMobile';
 
-const EMAIL = 'a.dasilva@project89.org';
 
 export default function Layout({ children }) {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [showCopied, setShowCopied] = useState(false);
+  const [menuPath, setMenuPath] = useState(null);
+  const menuButton = useRef(null);
   const location = useLocation();
+  const mobileMenuOpen = menuPath === location.key;
+  const setMobileMenuOpen = useCallback((open) => setMenuPath(open ? location.key : null), [location.key]);
   const isMobile = useIsMobile();
+  const pathname = location.pathname.replace(/\/$/, '') || '/';
   const isUXSection =
-    location.pathname === '/ux' || location.pathname.startsWith('/work/');
+    pathname === '/ux' || pathname.startsWith('/work/');
 
   useEffect(() => {
-    setMobileMenuOpen(false);
-  }, [location.pathname]);
-
-  const handleEmailClick = (e) => {
-    e.preventDefault();
-    navigator.clipboard.writeText(EMAIL).then(() => {
-      setShowCopied(true);
-      if (isMobile) {
-        setTimeout(() => {
-          setShowCopied(false);
-          setMobileMenuOpen(false);
-        }, 1500);
-      } else {
-        setTimeout(() => setShowCopied(false), 2000);
+    if (!mobileMenuOpen) return;
+    const escape = (event) => {
+      if (event.key === 'Escape') {
+        setMobileMenuOpen(false);
+        menuButton.current?.focus();
       }
-    });
-  };
+    };
+    document.addEventListener('keydown', escape);
+    return () => document.removeEventListener('keydown', escape);
+  }, [mobileMenuOpen, setMobileMenuOpen]);
 
   return (
     <div className={styles.container}>
-      <nav className={styles.nav}>
+      <a href="#main-content" className="skip-link">Skip to content</a>
+      <nav className={styles.nav} aria-label="Main navigation">
         <div className={styles.navInner}>
           <Link
             to="/"
@@ -50,18 +47,23 @@ export default function Layout({ children }) {
           </Link>
 
           <button
+            ref={menuButton}
+            type="button"
+            aria-expanded={mobileMenuOpen}
+            aria-controls="main-navigation"
             className={styles.hamburger}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
+            aria-label={mobileMenuOpen ? "Close navigation" : "Open navigation"}
           >
             <span className={`${styles.hamburgerLine} ${mobileMenuOpen ? styles.hamburgerLineRotateDown : ''}`} />
             <span className={`${styles.hamburgerLine} ${mobileMenuOpen ? styles.hamburgerLineHidden : ''}`} />
             <span className={`${styles.hamburgerLine} ${mobileMenuOpen ? styles.hamburgerLineRotateUp : ''}`} />
           </button>
 
-          <div className={`${styles.navLinks} ${mobileMenuOpen ? styles.navLinksOpen : ''}`}>
+          <div id="main-navigation" inert={isMobile && !mobileMenuOpen} className={`${styles.navLinks} ${mobileMenuOpen ? styles.navLinksOpen : ''}`}>
             <Link
               to="/ux"
+              aria-current={isUXSection ? "page" : undefined}
               className={`${styles.navLink} ${isUXSection ? styles.navLinkActive : ''}`}
               onClick={() => setMobileMenuOpen(false)}
             >
@@ -69,37 +71,34 @@ export default function Layout({ children }) {
             </Link>
             <Link
               to="/film"
-              className={`${styles.navLink} ${location.pathname === '/film' ? styles.navLinkActive : ''}`}
+              aria-current={pathname === '/film' ? "page" : undefined}
+              className={`${styles.navLink} ${pathname === '/film' ? styles.navLinkActive : ''}`}
               onClick={() => setMobileMenuOpen(false)}
             >
               Film
             </Link>
             <Link
               to="/about"
-              className={`${styles.navLink} ${location.pathname === '/about' ? styles.navLinkActive : ''}`}
+              aria-current={pathname === '/about' ? "page" : undefined}
+              className={`${styles.navLink} ${pathname === '/about' ? styles.navLinkActive : ''}`}
               onClick={() => setMobileMenuOpen(false)}
             >
               About
             </Link>
             <Link
               to="/extras"
-              className={`${styles.navLink} ${location.pathname === '/extras' ? styles.navLinkActive : ''}`}
+              aria-current={pathname === '/extras' ? "page" : undefined}
+              className={`${styles.navLink} ${pathname === '/extras' ? styles.navLinkActive : ''}`}
               onClick={() => setMobileMenuOpen(false)}
             >
               Extras
             </Link>
-            <button
-              className={styles.emailCta}
-              onClick={handleEmailClick}
-            >
-              {EMAIL}
-              {showCopied && <span className={styles.copiedToast}>Copied to clipboard!</span>}
-            </button>
+            <CopyEmail className={styles.emailCta} />
           </div>
         </div>
       </nav>
 
-      <main className={styles.main}>
+      <main id="main-content" tabIndex={-1} className={styles.main}>
         {children}
       </main>
 
@@ -114,7 +113,7 @@ export default function Layout({ children }) {
             <span>Andrew da Silva</span>
           </p>
           <div className={styles.footerLinks}>
-            <a href="mailto:a.dasilva@project89.org" className={styles.footerLink}>Email</a>
+            <CopyEmail className={styles.footerLink}>Copy email</CopyEmail>
             <span className={styles.footerDivider}>·</span>
             <a href="https://www.linkedin.com/in/andrew-dasilva-lvx/" target="_blank" rel="noopener noreferrer" className={styles.footerLink}>LinkedIn</a>
           </div>

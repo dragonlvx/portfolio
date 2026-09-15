@@ -1,3 +1,4 @@
+import { activateMediaOnKey, focusMediaTrigger } from '../components/mediaKeyboard';
 import { useState } from 'react';
 import styles from './Extras.module.css';
 import Lightbox from '../components/Lightbox';
@@ -139,6 +140,11 @@ export default function Extras() {
             className={styles.projectImg}
             style={{ maxWidth: '600px', maxHeight: '289px', width: '100%', height: 'auto', margin: '0 auto' }}
             onClick={() => openLightbox(images[0].src, images[0].alt)}
+           role="button"
+           tabIndex={0}
+           onKeyDown={activateMediaOnKey}
+           onPointerDown={focusMediaTrigger}
+           aria-label={images[0].alt}
           />
         </div>
       );
@@ -157,6 +163,11 @@ export default function Extras() {
                 className={styles.projectImg}
                 style={img.contain ? { objectFit: 'contain', padding: '16px', background: '#f0efed' } : {}}
                 onClick={() => openLightbox(img.src, img.alt)}
+               role="button"
+               tabIndex={0}
+               onKeyDown={activateMediaOnKey}
+               onPointerDown={focusMediaTrigger}
+               aria-label={img.alt}
               />
             </div>
           ))}
@@ -182,6 +193,11 @@ export default function Extras() {
                   ...(img.objectPosition ? { objectPosition: img.objectPosition } : {}),
                 }}
                 onClick={() => openLightbox(img.lightboxSrc || img.src, img.alt)}
+               role="button"
+               tabIndex={0}
+               onKeyDown={activateMediaOnKey}
+               onPointerDown={focusMediaTrigger}
+               aria-label={img.alt}
               />
             </div>
           ))}
@@ -200,6 +216,11 @@ export default function Extras() {
             className={styles.projectImg}
             style={images[0].contain ? { objectFit: 'contain', padding: '24px', background: '#f0efed' } : {}}
             onClick={() => openLightbox(images[0].src, images[0].alt)}
+           role="button"
+           tabIndex={0}
+           onKeyDown={activateMediaOnKey}
+           onPointerDown={focusMediaTrigger}
+           aria-label={images[0].alt}
           />
         </div>
       );
@@ -217,6 +238,11 @@ export default function Extras() {
                 className={styles.projectImg}
                 style={img.contain ? { objectFit: 'contain', padding: '16px', background: '#f0efed' } : {}}
                 onClick={() => openLightbox(img.src, img.alt)}
+               role="button"
+               tabIndex={0}
+               onKeyDown={activateMediaOnKey}
+               onPointerDown={focusMediaTrigger}
+               aria-label={img.alt}
               />
             </div>
           ))}
@@ -235,6 +261,11 @@ export default function Extras() {
               className={styles.projectImg}
               style={images[0].contain ? { objectFit: 'contain', padding: '24px', background: '#f0efed' } : {}}
               onClick={() => openLightbox(images[0].src, images[0].alt)}
+             role="button"
+             tabIndex={0}
+             onKeyDown={activateMediaOnKey}
+             onPointerDown={focusMediaTrigger}
+             aria-label={images[0].alt}
             />
           </div>
           <div className={styles.projectImageTrioSide}>
@@ -247,6 +278,11 @@ export default function Extras() {
                   className={styles.projectImg}
                   style={img.contain ? { objectFit: 'contain', padding: '16px', background: '#f0efed' } : {}}
                   onClick={() => openLightbox(img.src, img.alt)}
+                 role="button"
+                 tabIndex={0}
+                 onKeyDown={activateMediaOnKey}
+                 onPointerDown={focusMediaTrigger}
+                 aria-label={img.alt}
                 />
               </div>
             ))}
@@ -270,6 +306,11 @@ export default function Extras() {
                 ...(img.objectPosition ? { objectPosition: img.objectPosition } : {}),
               }}
               onClick={() => openLightbox(img.src, img.alt)}
+             role="button"
+             tabIndex={0}
+             onKeyDown={activateMediaOnKey}
+             onPointerDown={focusMediaTrigger}
+             aria-label={img.alt}
             />
           </div>
         ))}
@@ -278,7 +319,7 @@ export default function Extras() {
   };
 
   return (
-    <main className={styles.extrasMain}>
+    <div className={styles.extrasMain}>
       <div className={styles.extrasContainer}>
         <header className={styles.extrasHeader}>
           <h1 className={styles.extrasTitle}>Extras</h1>
@@ -314,6 +355,6 @@ export default function Extras() {
           onNext={goNext}
         />
       )}
-    </main>
+    </div>
   );
 }

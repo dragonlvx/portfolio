@@ -1,14 +1,17 @@
+import { activateMediaOnKey, focusMediaTrigger } from '../components/mediaKeyboard';
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import styles from '../styles/caseStudy.module.css';
 import Lightbox from '../components/Lightbox';
+import useMediaQuery from '../hooks/useMediaQuery';
 import useIsMobile from '../hooks/useIsMobile';
 
 export default function Project89() {
   const isMobile = useIsMobile();
+  const reducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
   const [lightboxIndex, setLightboxIndex] = useState(null);
   const [beforeAfterIndex, setBeforeAfterIndex] = useState(0);
-  const [isAutoScrolling, setIsAutoScrolling] = useState(true);
+  const [isAutoScrolling, setIsAutoScrolling] = useState(() => !window.matchMedia('(max-width: 768px), (prefers-reduced-motion: reduce)').matches);
   const beforeCarouselRef = useRef(null);
   const memeCarouselRef = useRef(null);
 
@@ -71,12 +74,12 @@ export default function Project89() {
 
   // Auto-scroll timer for before/after
   useEffect(() => {
-    if (!isAutoScrolling) return;
+    if (!isAutoScrolling || reducedMotion) return;
     const timer = setInterval(() => {
       setBeforeAfterIndex((prev) => (prev + 1) % beforeAfterImages.length);
     }, 5000);
     return () => clearInterval(timer);
-  }, [isAutoScrolling, beforeAfterImages.length]);
+  }, [isAutoScrolling, beforeAfterImages.length, reducedMotion]);
 
   // Meme carousel - CSS animation handles smooth auto-scroll
   // This effect handles pausing on user interaction
@@ -202,7 +205,7 @@ export default function Project89() {
   const currentImage = lightboxIndex !== null ? allLightboxItems[lightboxIndex] : null;
 
   return (
-    <main className={styles.main}>
+    <div className={styles.main}>
       {/* Hero Section */}
       <section className={styles.hero}>
         <div className={styles.heroImageContainer}>
@@ -259,6 +262,13 @@ export default function Project89() {
         </div>
       </section>
 
+      <section className={styles.projectMilestones} aria-labelledby="production-overview">
+        <div className={styles.projectMilestonesInner}>
+          <h2 id="production-overview" className={styles.projectMilestonesTitle}>Production at a glance</h2>
+          <p>I produced full 5–10 minute anime-style episodes in 3–4 weeks as a solo creator, and documented the workflow in community tutorials so others could make their own videos.</p>
+        </div>
+      </section>
+
       {/* The Concept */}
       <section className={styles.section}>
         <div className={styles.sectionInnerWide}>
@@ -280,6 +290,11 @@ export default function Project89() {
                 loading="lazy"
                 className={`${styles.sectionBannerVideo} ${styles.clickableImage}`}
                 onClick={() => openLightbox('/images/project89/89banner1.mp4', 'Project 89 Concept Banner')}
+               role="button"
+               tabIndex={0}
+               onKeyDown={activateMediaOnKey}
+               onPointerDown={focusMediaTrigger}
+               aria-label="Project 89 Concept Banner"
               />
             ) : (
               <video
@@ -314,6 +329,11 @@ export default function Project89() {
                     loading="lazy"
                     className={`${styles.conceptImage} ${styles.clickableImage}`}
                     onClick={() => openLightbox(item.image, item.text)}
+                   role="button"
+                   tabIndex={0}
+                   onKeyDown={activateMediaOnKey}
+                   onPointerDown={focusMediaTrigger}
+                   aria-label={item.text}
                   />
                 </div>
                 <div className={styles.conceptText}>
@@ -347,6 +367,11 @@ export default function Project89() {
                 loading="lazy"
                 className={`${styles.sectionBannerVideo} ${styles.clickableImage}`}
                 onClick={() => openLightbox('/images/project89/89banner-dragon.mp4', 'My Role Banner')}
+               role="button"
+               tabIndex={0}
+               onKeyDown={activateMediaOnKey}
+               onPointerDown={focusMediaTrigger}
+               aria-label="My Role Banner"
               />
             ) : (
               <video
@@ -405,6 +430,11 @@ export default function Project89() {
                     loading="lazy"
                     className={`${role.topAlign ? styles.roleCardImgTop : styles.roleCardImg} ${styles.clickableImage}`}
                     onClick={() => openLightbox(role.image, role.title)}
+                   role="button"
+                   tabIndex={0}
+                   onKeyDown={activateMediaOnKey}
+                   onPointerDown={focusMediaTrigger}
+                   aria-label={role.title}
                   />
                 </div>
                 <div className={styles.roleCardContent}>
@@ -445,6 +475,11 @@ export default function Project89() {
                 loading="lazy"
                 className={`${styles.sectionBannerVideo} ${styles.clickableImage}`}
                 onClick={() => openLightbox('/images/project89/89banner-glitch.mp4', 'What We Built Banner')}
+               role="button"
+               tabIndex={0}
+               onKeyDown={activateMediaOnKey}
+               onPointerDown={focusMediaTrigger}
+               aria-label="What We Built Banner"
               />
             ) : (
               <video
@@ -504,6 +539,11 @@ export default function Project89() {
                       loading="lazy"
                       className={styles.builtVideo}
                       onClick={() => openLightbox(item.video, item.title)}
+                     role="button"
+                     tabIndex={0}
+                     onKeyDown={activateMediaOnKey}
+                     onPointerDown={focusMediaTrigger}
+                     aria-label={item.title}
                     />
                   ) : (
                     <video
@@ -557,6 +597,11 @@ export default function Project89() {
                 loading="lazy"
                 className={`${styles.sectionBannerVideo} ${styles.clickableImage}`}
                 onClick={() => openLightbox('/images/project89/animated-eye.mp4', 'Visual Content Pipeline')}
+               role="button"
+               tabIndex={0}
+               onKeyDown={activateMediaOnKey}
+               onPointerDown={focusMediaTrigger}
+               aria-label="Visual Content Pipeline"
               />
             ) : (
               <video
@@ -611,6 +656,11 @@ export default function Project89() {
                       loading="lazy"
                       className={`${styles.beforeAfterImage} ${styles.clickableImage}`}
                       onClick={() => openLightbox(beforeAfterImages[beforeAfterIndex].before, `${beforeAfterImages[beforeAfterIndex].name} - Before`)}
+                     role="button"
+                     tabIndex={0}
+                     onKeyDown={activateMediaOnKey}
+                     onPointerDown={focusMediaTrigger}
+                     aria-label={`${beforeAfterImages[beforeAfterIndex].name} - Before`}
                     />
                   </div>
                 </div>
@@ -634,6 +684,11 @@ export default function Project89() {
                       loading="lazy"
                       className={`${styles.beforeAfterImage} ${styles.clickableImage}`}
                       onClick={() => openLightbox(beforeAfterImages[beforeAfterIndex].after, `${beforeAfterImages[beforeAfterIndex].name} - After`)}
+                     role="button"
+                     tabIndex={0}
+                     onKeyDown={activateMediaOnKey}
+                     onPointerDown={focusMediaTrigger}
+                     aria-label={`${beforeAfterImages[beforeAfterIndex].name} - After`}
                     />
                   </div>
                 </div>
@@ -661,6 +716,7 @@ export default function Project89() {
                 className={`${styles.beforeAfterDot} ${i === beforeAfterIndex ? styles.beforeAfterDotActive : ''}`}
                 onClick={() => goToIndex(i)}
                 aria-label={`View example ${i + 1}`}
+                aria-pressed={i === beforeAfterIndex}
               />
             ))}
             <button
@@ -678,7 +734,7 @@ export default function Project89() {
             <div className={styles.infiniteCarousel} ref={memeCarouselRef}>
               <div className={styles.infiniteCarouselTrack} ref={memeTrackRef}>
                 {/* Duplicate the shuffled array for seamless infinite loop */}
-                {[...shuffledMemes, ...shuffledMemes].map((item, i) => (
+                {(isMobile ? shuffledMemes : [...shuffledMemes, ...shuffledMemes]).map((item, i) => (
                   <div key={i} className={styles.infiniteCarouselItem}>
                     <img
                       src={item.src}
@@ -686,6 +742,11 @@ export default function Project89() {
                       loading="lazy"
                       className={`${styles.infiniteCarouselImage} ${styles.clickableImage}`}
                       onClick={() => openLightbox(item.src, item.alt)}
+                     role="button"
+                     tabIndex={0}
+                     onKeyDown={activateMediaOnKey}
+                     onPointerDown={focusMediaTrigger}
+                     aria-label={item.alt}
                     />
                   </div>
                 ))}
@@ -716,6 +777,11 @@ export default function Project89() {
                 loading="lazy"
                 className={`${styles.sectionBannerVideo} ${styles.clickableImage}`}
                 onClick={() => openLightbox('/images/project89/animated-cyber-tree.mp4', 'AI-Native Video Production')}
+               role="button"
+               tabIndex={0}
+               onKeyDown={activateMediaOnKey}
+               onPointerDown={focusMediaTrigger}
+               aria-label="AI-Native Video Production"
               />
             ) : (
               <video
@@ -817,6 +883,11 @@ export default function Project89() {
                         loading="lazy"
                         className={styles.pipelineStepVideo}
                         onClick={() => openLightbox(item.media, item.title)}
+                       role="button"
+                       tabIndex={0}
+                       onKeyDown={activateMediaOnKey}
+                       onPointerDown={focusMediaTrigger}
+                       aria-label={item.title}
                       />
                     ) : (
                       <video
@@ -836,6 +907,11 @@ export default function Project89() {
                         loading="lazy"
                         className={`${styles.pipelineStepImg} ${styles.hoverImageBase}`}
                         onClick={() => openLightbox(item.media, item.title)}
+                       role="button"
+                       tabIndex={0}
+                       onKeyDown={activateMediaOnKey}
+                       onPointerDown={focusMediaTrigger}
+                       aria-label={item.title}
                       />
                       <img
                         src={item.mediaHover}
@@ -843,6 +919,11 @@ export default function Project89() {
                         loading="lazy"
                         className={`${styles.pipelineStepImg} ${styles.hoverImageOverlay}`}
                         onClick={() => openLightbox(item.mediaHover, item.title)}
+                       role="button"
+                       tabIndex={0}
+                       onKeyDown={activateMediaOnKey}
+                       onPointerDown={focusMediaTrigger}
+                       aria-label={`${item.title} - hover`}
                       />
                     </div>
                   ) : (
@@ -852,6 +933,11 @@ export default function Project89() {
                       loading="lazy"
                       className={`${styles.pipelineStepImg} ${styles.clickableImage}`}
                       onClick={() => openLightbox(item.media, item.title)}
+                     role="button"
+                     tabIndex={0}
+                     onKeyDown={activateMediaOnKey}
+                     onPointerDown={focusMediaTrigger}
+                     aria-label={item.title}
                     />
                   )}
                 </div>
@@ -890,6 +976,11 @@ export default function Project89() {
                       loading="lazy"
                       className={styles.tutorialVideo}
                       onClick={() => openLightbox('/images/project89/how-to-make-PX8-message-video.mp4', 'How to Make PX8 Message Video')}
+                     role="button"
+                     tabIndex={0}
+                     onKeyDown={activateMediaOnKey}
+                     onPointerDown={focusMediaTrigger}
+                     aria-label="How to Make PX8 Message Video"
                     />
                   ) : (
                     <video
@@ -926,6 +1017,11 @@ export default function Project89() {
                       loading="lazy"
                       className={styles.tutorialVideo}
                       onClick={() => openLightbox('/images/project89/PX8-message.mp4', 'PX8 Message Example')}
+                     role="button"
+                     tabIndex={0}
+                     onKeyDown={activateMediaOnKey}
+                     onPointerDown={focusMediaTrigger}
+                     aria-label="PX8 Message Example"
                     />
                   ) : (
                     <video
@@ -986,6 +1082,11 @@ export default function Project89() {
                     loading="lazy"
                     className={styles.videoCarouselVideo}
                     onClick={() => openLightbox(item.src, item.title)}
+                   role="button"
+                   tabIndex={0}
+                   onKeyDown={activateMediaOnKey}
+                   onPointerDown={focusMediaTrigger}
+                   aria-label={item.title}
                   />
                 ) : (
                   <video
@@ -1118,7 +1219,7 @@ export default function Project89() {
               → View Gamemaker Demo
             </Link>
           </div>
-          <Link to="/" className={styles.backLink}>
+          <Link to="/ux" className={styles.backLink}>
             ← Back to Work
           </Link>
         </div>
@@ -1136,6 +1237,6 @@ export default function Project89() {
           label={currentImage.label}
         />
       )}
-    </main>
+    </div>
   );
 }

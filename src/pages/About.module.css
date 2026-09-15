@@ -143,3 +143,7 @@
     text-align: center;
   }
 }
+
+@media (max-width: 768px) {
+  .contactLink { min-height: 44px; justify-content: center; }
+}

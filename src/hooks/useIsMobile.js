@@ -1,18 +1,5 @@
-import { useState, useEffect } from 'react';
-
-const MOBILE_BREAKPOINT = 768;
+import useMediaQuery from './useMediaQuery';
 
 export default function useIsMobile() {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const mql = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`);
-    setIsMobile(mql.matches);
-
-    const handler = (e) => setIsMobile(e.matches);
-    mql.addEventListener('change', handler);
-    return () => mql.removeEventListener('change', handler);
-  }, []);
-
-  return isMobile;
+  return useMediaQuery('(max-width: 768px)');
 }

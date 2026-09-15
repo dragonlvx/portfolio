@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import AmbientVideo from '../components/AmbientVideo';
 import styles from './Landing.module.css';
-import useIsMobile from '../hooks/useIsMobile';
 
 const categories = [
   {
@@ -21,36 +20,6 @@ const categories = [
 ];
 
 export default function Landing() {
-  const navigate = useNavigate();
-  const [hoveredCard, setHoveredCard] = useState(null);
-  const [tappedCard, setTappedCard] = useState(null);
-  const isMobile = useIsMobile();
-
-  const handleCardInteraction = (category, e) => {
-    if (isMobile) {
-      e.preventDefault();
-      if (tappedCard === category.id) {
-        navigate(category.path);
-        setTappedCard(null);
-      } else {
-        setTappedCard(category.id);
-      }
-    } else {
-      e.preventDefault();
-      navigate(category.path);
-    }
-  };
-
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (!e.target.closest('.category-card')) {
-        setTappedCard(null);
-      }
-    };
-    document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
-  }, []);
-
   return (
     <>
       <header className={styles.hero}>
@@ -69,8 +38,8 @@ export default function Landing() {
             <span className={styles.introLine1}>Hey! I'm Andrew.</span>
             <br className={styles.desktopBreak} />
             <span className={styles.introLine2}>
-              I design AI-native products and produce AI-generated film, and I teach teams to
-              do both.
+              I direct and edit film and video, design AI-native products, and teach teams to
+              build with generative AI.
             </span>
           </p>
           <div className={styles.credentials}>
@@ -87,55 +56,24 @@ export default function Landing() {
 
       <section className={styles.categoriesSection}>
         <div className={styles.categoriesGrid}>
-          {categories.map((category) => {
-            const isActive = hoveredCard === category.id || tappedCard === category.id;
-            return (
-              <a
-                key={category.id}
-                href={category.path}
-                className={`category-card ${styles.categoryCard}`}
-                style={
-                  category.image
-                    ? {
-                        backgroundImage: `url(${category.image})`,
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                      }
-                    : undefined
-                }
-                onMouseEnter={() => setHoveredCard(category.id)}
-                onMouseLeave={() => setHoveredCard(null)}
-                onClick={(e) => handleCardInteraction(category, e)}
-                tabIndex={0}
+          {categories.map((category) => (
+            <div key={category.id} className={styles.categoryItem}>
+              <Link
+                to={category.path}
+                className={styles.categoryCard}
+                style={category.image ? { backgroundImage: `url(${category.image})`, backgroundSize: 'cover', backgroundPosition: 'center' } : undefined}
                 aria-label={`View ${category.title} work`}
               >
                 {category.video && (
-                  <video
-                    className={styles.categoryVideo}
-                    src={category.video}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    preload="auto"
-                  />
+                  <AmbientVideo className={styles.categoryVideo} src={category.video} poster="/images/film/project89-trailer-titlecard.jpg" label="Film preview" decorative />
                 )}
-
-                {/* Always-visible label so both paths are readable without hovering */}
                 <div className={styles.categoryLabel}>
                   <h3 className={styles.categoryTitle}>{category.title}</h3>
                 </div>
-
-                <div className={styles.categoryOverlay} style={{ opacity: isActive ? 1 : 0 }}>
-                  <h3 className={styles.categoryTitle}>{category.title}</h3>
-                  <p className={styles.categorySubtitle}>{category.subtitle}</p>
-                  {tappedCard === category.id && (
-                    <span className={styles.viewButton}>View Work</span>
-                  )}
-                </div>
-              </a>
-            );
-          })}
+              </Link>
+              <p className={styles.mobileDescription}>{category.subtitle}</p>
+            </div>
+          ))}
         </div>
       </section>
     </>

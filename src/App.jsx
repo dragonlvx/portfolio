@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import PageMetadata from './components/PageMetadata';
 import Layout from './components/Layout';
 import ScrollToTop from './components/ScrollToTop';
 import Landing from './pages/Landing';
@@ -15,6 +16,7 @@ import './styles/global.css';
 function App() {
   return (
     <Router>
+      <PageMetadata />
       <ScrollToTop />
       <Layout>
         <Routes>

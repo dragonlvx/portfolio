@@ -147,7 +147,25 @@
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
 }
 
+.projectArtwork {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+}
+
+.projectCard:focus-visible {
+  outline: 3px solid #5f9ea0;
+  outline-offset: 5px;
+}
+
+.projectCard:hover .projectOverlay,
+.projectCard:focus-visible .projectOverlay {
+  opacity: 1;
+}
+
 .projectOverlay {
+  opacity: 0;
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.65);
@@ -177,22 +195,7 @@
   max-width: 220px;
 }
 
-.viewButton {
-  margin-top: 20px;
-  padding: 12px 24px;
-  background: #5f9ea0;
-  color: #fff;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-}
-
 @media (max-width: 768px) {
-  .projectCard {
-    aspect-ratio: 4/3;
-  }
-
   .heroHeader {
     margin-bottom: 40px;
   }
@@ -253,5 +256,54 @@
   .credentialPill {
     font-size: 12px;
     padding: 5px 12px;
+  }
+}
+
+/* Keep artwork unobstructed and captions visible on tablets and touch devices. */
+@media (max-width: 1024px), (hover: none), (pointer: coarse) {
+  .projectsGrid {
+    align-items: start;
+    row-gap: 36px;
+  }
+
+  .projectCard {
+    display: block;
+    aspect-ratio: auto;
+    overflow: visible;
+    box-shadow: none;
+  }
+
+  .projectCard:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .projectArtwork {
+    position: relative;
+    display: block;
+    aspect-ratio: 4 / 3;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  .projectOverlay {
+    position: static;
+    opacity: 1;
+    background: transparent;
+    padding: 18px 4px 0;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .projectTitle {
+    color: #1a1a1a;
+    margin-bottom: 6px;
+  }
+
+  .projectSubtitle {
+    max-width: none;
+    color: #444;
+    font-size: 16px;
+    line-height: 1.6;
   }
 }

@@ -368,7 +368,7 @@
 }
 
 .caseWrapOpen {
-  max-height: 1200px;
+  max-height: none;
 }
 
 .caseStudy {
@@ -577,4 +577,17 @@
   .contactInner {
     padding: 38px 24px;
   }
+}
+
+button.clickable { border: 0; padding: 0; width: 100%; font: inherit; background: transparent; }
+.caseWrap[hidden] { display: none; }
+@media (max-width: 768px) {
+  .expandButton { min-height: 44px; }
+  .caseHeading { font-size: 14px; color: #386b6d; }
+  .caseBody { font-size: 16px; }
+}
+
+@media (max-width: 540px) {
+  .capabilitiesInner { grid-template-columns: repeat(2, minmax(0, 1fr)); width: 100%; }
+  .capabilityPill { white-space: normal; text-align: center; max-width: 100%; font-size: 14px; padding: 8px 10px; }
 }

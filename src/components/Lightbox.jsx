@@ -1,83 +1,52 @@
 import { useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
+import useIsMobile from '../hooks/useIsMobile';
 import styles from './Lightbox.module.css';
 
 export default function Lightbox({ src, alt, onClose, isVideo, keepMuted, onPrev, onNext, label, lightboxBg }) {
-  const videoRef = useRef(null);
+  const dialogRef = useRef(null);
+  const mobile = useIsMobile();
 
   useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape') {
-        onClose();
-      } else if (e.key === 'ArrowLeft' && onPrev) {
-        onPrev();
-      } else if (e.key === 'ArrowRight' && onNext) {
-        onNext();
-      }
-    };
-    document.addEventListener('keydown', handleKeyDown);
+    const dialog = dialogRef.current;
+    const trigger = document.activeElement;
+    const overflow = document.body.style.overflow;
+    dialog.showModal();
     document.body.style.overflow = 'hidden';
-
-    // Unmute video after it starts playing (user interaction has occurred via click)
-    if (isVideo && videoRef.current && !keepMuted) {
-      videoRef.current.muted = false;
-    }
-
     return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = '';
+      dialog.close();
+      document.body.style.overflow = overflow;
+      if (trigger instanceof HTMLElement && trigger.isConnected) trigger.focus({ preventScroll: true });
     };
-  }, [onClose, isVideo, onPrev, onNext]);
+  }, []);
 
-  return (
-    <div className={styles.overlay} onClick={onClose}>
-      <button className={styles.closeButton} onClick={onClose} aria-label="Close">
-        ×
-      </button>
-
-      {onPrev && (
-        <button
-          className={`${styles.navButton} ${styles.navPrev}`}
-          onClick={(e) => { e.stopPropagation(); onPrev(); }}
-          aria-label="Previous image"
-        >
-          ‹
-        </button>
-      )}
-
+  return createPortal(
+    <dialog ref={dialogRef} className={styles.overlay} aria-label={label || alt || 'Media viewer'}
+      onCancel={(event) => { event.preventDefault(); onClose(); }}
+      onClick={(event) => { if (event.target === event.currentTarget) onClose(); }}
+      onKeyDown={(event) => {
+        if (event.key === 'Tab') {
+          const items = Array.from(dialogRef.current.querySelectorAll('button, video[controls]'));
+          const first = items[0];
+          const last = items[items.length - 1];
+          if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+          else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+        }
+        // Leave native video keys available for seeking and volume.
+        if (event.target.tagName === 'VIDEO') return;
+        if (event.key === 'ArrowLeft' && onPrev) { event.preventDefault(); onPrev(); }
+        if (event.key === 'ArrowRight' && onNext) { event.preventDefault(); onNext(); }
+      }}>
+      <button type="button" autoFocus className={styles.closeButton} onClick={onClose} aria-label="Close media viewer">×</button>
+      {onPrev && <button type="button" className={`${styles.navButton} ${styles.navPrev}`} onClick={onPrev} aria-label="Previous media">‹</button>}
       {isVideo ? (
-        <video
-          ref={videoRef}
-          src={src}
-          autoPlay
-          loop
-          muted={keepMuted}
-          playsInline
-          controls={!keepMuted}
-          className={styles.image}
-          onClick={(e) => e.stopPropagation()}
-        />
+        <video key={src} src={src} autoPlay loop muted={keepMuted} playsInline
+          controls={mobile || !keepMuted} className={styles.image} aria-label={alt || label} />
       ) : (
-        <img
-          src={src}
-          alt={alt}
-          className={`${styles.image} ${lightboxBg ? styles.imageLightBg : ''}`}
-          onClick={(e) => e.stopPropagation()}
-        />
+        <img src={src} alt={alt || label || ''} className={`${styles.image} ${lightboxBg ? styles.imageLightBg : ''}`} />
       )}
-
-      {onNext && (
-        <button
-          className={`${styles.navButton} ${styles.navNext}`}
-          onClick={(e) => { e.stopPropagation(); onNext(); }}
-          aria-label="Next image"
-        >
-          ›
-        </button>
-      )}
-
-      {label && (
-        <span className={styles.label} onClick={(e) => e.stopPropagation()}>{label}</span>
-      )}
-    </div>
+      {onNext && <button type="button" className={`${styles.navButton} ${styles.navNext}`} onClick={onNext} aria-label="Next media">›</button>}
+      {label && <span className={styles.label} aria-live="polite">{label}</span>}
+    </dialog>, document.body
   );
 }

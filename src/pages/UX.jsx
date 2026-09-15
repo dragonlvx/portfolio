@@ -1,7 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styles from './UX.module.css';
-import useIsMobile from '../hooks/useIsMobile';
 
 const projects = [
   {
@@ -39,36 +37,6 @@ const projects = [
 ];
 
 export default function UX() {
-  const navigate = useNavigate();
-  const [hoveredCard, setHoveredCard] = useState(null);
-  const [tappedCard, setTappedCard] = useState(null);
-  const isMobile = useIsMobile();
-
-  const handleCardInteraction = (project, e) => {
-    if (isMobile) {
-      e.preventDefault();
-      if (tappedCard === project.id) {
-        navigate(project.path);
-        setTappedCard(null);
-      } else {
-        setTappedCard(project.id);
-      }
-    } else {
-      e.preventDefault();
-      navigate(project.path);
-    }
-  };
-
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (!e.target.closest('.project-card')) {
-        setTappedCard(null);
-      }
-    };
-    document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
-  }, []);
-
   return (
     <>
       <header className={styles.hero}>
@@ -99,34 +67,22 @@ export default function UX() {
       <section className={styles.projectsSection}>
         <div className={styles.projectsGrid}>
           {projects.map((project) => (
-            <a
+            <Link
               key={project.id}
-              href={project.path}
-              className={`project-card ${styles.projectCard}`}
-              style={{
-                backgroundImage: `url(${project.image})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center'
-              }}
-              onMouseEnter={() => setHoveredCard(project.id)}
-              onMouseLeave={() => setHoveredCard(null)}
-              onClick={(e) => handleCardInteraction(project, e)}
-              tabIndex={0}
+              to={project.path}
+              className={styles.projectCard}
               aria-label={`View ${project.title} project`}
             >
-              <div
-                className={styles.projectOverlay}
-                style={{
-                  opacity: (hoveredCard === project.id || tappedCard === project.id) ? 1 : 0
-                }}
-              >
+              <span
+                className={styles.projectArtwork}
+                style={{ backgroundImage: `url(${project.image})` }}
+                aria-hidden="true"
+              />
+              <div className={styles.projectOverlay}>
                 <h3 className={styles.projectTitle}>{project.title}</h3>
                 <p className={styles.projectSubtitle}>{project.subtitle}</p>
-                {tappedCard === project.id && (
-                  <span className={styles.viewButton}>View Project</span>
-                )}
               </div>
-            </a>
+            </Link>
           ))}
         </div>
       </section>

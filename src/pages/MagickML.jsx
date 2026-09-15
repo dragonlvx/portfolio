@@ -1,3 +1,4 @@
+import { activateMediaOnKey, focusMediaTrigger } from '../components/mediaKeyboard';
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styles from '../styles/caseStudy.module.css';
@@ -115,7 +116,7 @@ export default function MagickML() {
   const currentImage = lightboxIndex !== null ? allLightboxItems[lightboxIndex] : null;
 
   return (
-    <main className={styles.main}>
+    <div className={styles.main}>
       {/* Hero Section */}
       <section className={styles.hero}>
         <div className={styles.heroImageContainer}>
@@ -161,6 +162,16 @@ export default function MagickML() {
         </div>
       </section>
 
+      <section className={styles.projectMilestones} aria-labelledby="magick-milestones">
+        <div className={styles.projectMilestonesInner}>
+          <h2 id="magick-milestones" className={styles.projectMilestonesTitle}>Company milestones</h2>
+          <p>
+            Magick ML raised <strong>$750,000 in startup investment</strong> and secured <strong>$200,000 in sponsorships</strong>.
+            {' '}We partnered with Google and were <strong>featured at Google I/O 2023</strong>.
+          </p>
+        </div>
+      </section>
+
       {/* The Challenge */}
       <section className={styles.section}>
         <div className={styles.sectionInnerWide}>
@@ -171,6 +182,11 @@ export default function MagickML() {
               loading="lazy"
               className={`${styles.sectionBannerImage} ${styles.clickableImage}`}
               onClick={() => openLightbox('/images/magick/challenge-magick-maker.png', 'Become a Magick Maker')}
+             role="button"
+             tabIndex={0}
+             onKeyDown={activateMediaOnKey}
+             onPointerDown={focusMediaTrigger}
+             aria-label="Become a Magick Maker"
             />
           </div>
         </div>
@@ -203,6 +219,11 @@ export default function MagickML() {
                   loading="lazy"
                   className={`${styles.imageCroppedTop} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/magick/challenge-onboarding.png', 'Onboarding pop-up design')}
+                 role="button"
+                 tabIndex={0}
+                 onKeyDown={activateMediaOnKey}
+                 onPointerDown={focusMediaTrigger}
+                 aria-label="Onboarding pop-up design"
                 />
               </div>
               <span className={styles.imageLabel}>Progressive onboarding pop-ups guided new users through key features step-by-step</span>
@@ -233,6 +254,11 @@ export default function MagickML() {
               loading="lazy"
               className={`${styles.sectionBannerImage} ${styles.clickableImage}`}
               onClick={() => openLightbox('/images/magick/userflow-wireframe-overview.png', 'User flow wireframe overview')}
+             role="button"
+             tabIndex={0}
+             onKeyDown={activateMediaOnKey}
+             onPointerDown={focusMediaTrigger}
+             aria-label="User flow wireframe overview"
             />
           </div>
         </div>
@@ -257,6 +283,11 @@ export default function MagickML() {
                     loading="lazy"
                     className={`${styles.image} ${styles.clickableImage}`}
                     onClick={() => openLightbox(`/images/magick/${step.img}`, step.caption)}
+                   role="button"
+                   tabIndex={0}
+                   onKeyDown={activateMediaOnKey}
+                   onPointerDown={focusMediaTrigger}
+                   aria-label={step.caption}
                   />
                 </div>
                 <span className={styles.imageLabel}>{step.caption}</span>
@@ -312,6 +343,11 @@ export default function MagickML() {
                     loading="lazy"
                     className={`${styles.roleImage} ${styles.clickableImage}`}
                     onClick={() => openLightbox(`/images/magick/${role.image}`, role.title)}
+                   role="button"
+                   tabIndex={0}
+                   onKeyDown={activateMediaOnKey}
+                   onPointerDown={focusMediaTrigger}
+                   aria-label={role.title}
                   />
                 </div>
                 <div className={styles.roleCardContent}>
@@ -339,6 +375,11 @@ export default function MagickML() {
               <div
                 className={styles.showcaseVideoWrapper}
                 onClick={() => openLightbox('/images/magick/VIDEO-MagickML-showcase.mp4', 'MagickML Platform Showcase')}
+               role="button"
+               tabIndex={0}
+               onKeyDown={activateMediaOnKey}
+               onPointerDown={focusMediaTrigger}
+               aria-label="MagickML Platform Showcase"
               >
                 <img
                   src="/images/magick/VIDEO-MagickML-showcase-poster.jpg"
@@ -398,6 +439,11 @@ export default function MagickML() {
                   loading="lazy"
                   className={`${styles.builtItemImage} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/magick/marketing-landing-page.png', 'Marketing landing page')}
+                 role="button"
+                 tabIndex={0}
+                 onKeyDown={activateMediaOnKey}
+                 onPointerDown={focusMediaTrigger}
+                 aria-label="Marketing landing page"
                 />
               </div>
               <div className={styles.builtItemContent}>
@@ -413,6 +459,11 @@ export default function MagickML() {
                   loading="lazy"
                   className={`${styles.builtItemImage} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/magick/portal-screenshot.png', 'User portal dashboard')}
+                 role="button"
+                 tabIndex={0}
+                 onKeyDown={activateMediaOnKey}
+                 onPointerDown={focusMediaTrigger}
+                 aria-label="User portal dashboard"
                 />
               </div>
               <div className={styles.builtItemContent}>
@@ -428,6 +479,11 @@ export default function MagickML() {
                   loading="lazy"
                   className={`${styles.builtItemImageCentered} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/magick/graph-banner.png', 'AIDE builder interface')}
+                 role="button"
+                 tabIndex={0}
+                 onKeyDown={activateMediaOnKey}
+                 onPointerDown={focusMediaTrigger}
+                 aria-label="AIDE builder interface"
                 />
               </div>
               <div className={styles.builtItemContent}>
@@ -458,6 +514,11 @@ export default function MagickML() {
                   loading="lazy"
                   className={`${styles.evolutionImage} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/magick/thoth-AIDEconcept0.png', 'Early functional design concept')}
+                 role="button"
+                 tabIndex={0}
+                 onKeyDown={activateMediaOnKey}
+                 onPointerDown={focusMediaTrigger}
+                 aria-label="Early functional design concept"
                 />
               </div>
               <span className={styles.imageLabel}>Early concept — basic and functional</span>
@@ -471,6 +532,11 @@ export default function MagickML() {
                   loading="lazy"
                   className={`${styles.evolutionImage} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/magick/graph-visual-IDE-Design-Concept.png', 'Neon design exploration')}
+                 role="button"
+                 tabIndex={0}
+                 onKeyDown={activateMediaOnKey}
+                 onPointerDown={focusMediaTrigger}
+                 aria-label="Neon design exploration"
                 />
               </div>
               <span className={styles.imageLabel}>Visual exploration — exciting but impractical</span>
@@ -484,6 +550,11 @@ export default function MagickML() {
                   loading="lazy"
                   className={`${styles.evolutionImage} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/magick/graph-visual-for a dungeon-adventure-agent.png', 'Final refined design')}
+                 role="button"
+                 tabIndex={0}
+                 onKeyDown={activateMediaOnKey}
+                 onPointerDown={focusMediaTrigger}
+                 aria-label="Final refined design"
                 />
               </div>
               <span className={styles.imageLabel}>Final design — color with purpose</span>
@@ -511,6 +582,11 @@ export default function MagickML() {
                   loading="lazy"
                   className={`${styles.progressionImage} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/magick/wireframe-template-iteration-1.png', 'B&W concept wireframe')}
+                 role="button"
+                 tabIndex={0}
+                 onKeyDown={activateMediaOnKey}
+                 onPointerDown={focusMediaTrigger}
+                 aria-label="Wireframe iteration 1"
                 />
               </div>
               <span className={styles.imageLabel}>B&W concept wireframe</span>
@@ -524,6 +600,11 @@ export default function MagickML() {
                   loading="lazy"
                   className={`${styles.progressionImage} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/magick/wireframe-template-iteration-2.png', 'First color pass')}
+                 role="button"
+                 tabIndex={0}
+                 onKeyDown={activateMediaOnKey}
+                 onPointerDown={focusMediaTrigger}
+                 aria-label="Wireframe iteration 2"
                 />
               </div>
               <span className={styles.imageLabel}>First color pass</span>
@@ -537,6 +618,11 @@ export default function MagickML() {
                   loading="lazy"
                   className={`${styles.progressionImage} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/magick/wireframe-template-iteration-3.png', 'MVP hi-fi concept')}
+                 role="button"
+                 tabIndex={0}
+                 onKeyDown={activateMediaOnKey}
+                 onPointerDown={focusMediaTrigger}
+                 aria-label="Wireframe iteration 3"
                 />
               </div>
               <span className={styles.imageLabel}>MVP hi-fi concept</span>
@@ -550,6 +636,11 @@ export default function MagickML() {
                   loading="lazy"
                   className={`${styles.progressionImage} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/magick/wireframe-template-iteration-4.png', 'Final design')}
+                 role="button"
+                 tabIndex={0}
+                 onKeyDown={activateMediaOnKey}
+                 onPointerDown={focusMediaTrigger}
+                 aria-label="Wireframe iteration 4"
                 />
               </div>
               <span className={styles.imageLabel}>Final design</span>
@@ -575,6 +666,11 @@ export default function MagickML() {
                 loading="lazy"
                 className={styles.carouselImage}
                 onClick={() => openLightbox(designSystemImages[currentDesignSlide], `Design system example ${currentDesignSlide + 1}`)}
+               role="button"
+               tabIndex={0}
+               onKeyDown={activateMediaOnKey}
+               onPointerDown={focusMediaTrigger}
+               aria-label={`Design system example ${currentDesignSlide + 1}`}
               />
               <button
                 className={`${styles.carouselButton} ${styles.carouselButtonPrev}`}
@@ -640,6 +736,11 @@ export default function MagickML() {
               loading="lazy"
               className={`${styles.sectionBannerImage} ${styles.clickableImage}`}
               onClick={() => openLightbox('/images/magick/marketing-magick-banner-top.png', 'Magick marketing materials')}
+             role="button"
+             tabIndex={0}
+             onKeyDown={activateMediaOnKey}
+             onPointerDown={focusMediaTrigger}
+             aria-label="Magick marketing materials"
             />
           </div>
         </div>
@@ -670,6 +771,11 @@ export default function MagickML() {
               loading="lazy"
               className={`${styles.sectionBannerImage} ${styles.clickableImage}`}
               onClick={() => openLightbox('/images/magick/marketing-magick-banner-bottom.png', 'Magick marketing examples')}
+             role="button"
+             tabIndex={0}
+             onKeyDown={activateMediaOnKey}
+             onPointerDown={focusMediaTrigger}
+             aria-label="Magick marketing examples"
             />
           </div>
         </div>
@@ -689,6 +795,11 @@ export default function MagickML() {
                 loading="lazy"
                 className={styles.carouselImage}
                 onClick={() => openLightbox(pitchDeckSlides[currentPitchSlide], `Pitch deck slide ${currentPitchSlide + 1}`)}
+               role="button"
+               tabIndex={0}
+               onKeyDown={activateMediaOnKey}
+               onPointerDown={focusMediaTrigger}
+               aria-label={`Pitch deck slide ${currentPitchSlide + 1}`}
               />
               <button
                 className={`${styles.carouselButton} ${styles.carouselButtonPrev}`}
@@ -733,6 +844,11 @@ export default function MagickML() {
               loading="lazy"
               className={`${styles.pitchDeckHistoryImage} ${styles.clickableImage}`}
               onClick={() => openLightbox('/images/magick/pitch-deck-history.png', 'Evolution of pitch deck designs across multiple versions')}
+             role="button"
+             tabIndex={0}
+             onKeyDown={activateMediaOnKey}
+             onPointerDown={focusMediaTrigger}
+             aria-label="Three earlier versions of the pitch deck cover slide"
             />
             <span className={styles.imageLabelLight}>Evolution of pitch deck designs across multiple versions</span>
           </div>
@@ -756,6 +872,11 @@ export default function MagickML() {
               loading="lazy"
               className={`${styles.googleIoImage} ${styles.clickableImage}`}
               onClick={() => openLightbox('/images/magick/google-io-magick.jpg', 'Magick ML featured at Google I/O 2023')}
+             role="button"
+             tabIndex={0}
+             onKeyDown={activateMediaOnKey}
+             onPointerDown={focusMediaTrigger}
+             aria-label="Magick ML featured on stage at Google I/O 2023 alongside LangChain, Chroma, and Vercel"
             />
           </div>
         </div>
@@ -814,6 +935,11 @@ export default function MagickML() {
               loading="lazy"
               className={`${styles.reflectionImage} ${styles.clickableImage}`}
               onClick={() => openLightbox('/images/magick/userflow-overview.png', 'Comprehensive user flow overview showing the full product journey')}
+             role="button"
+             tabIndex={0}
+             onKeyDown={activateMediaOnKey}
+             onPointerDown={focusMediaTrigger}
+             aria-label="Comprehensive user flow overview showing the full product journey"
             />
           </div>
         </div>
@@ -870,7 +996,7 @@ export default function MagickML() {
               → View Gamemaker Demo
             </Link>
           </div>
-          <Link to="/" className={styles.backLink}>
+          <Link to="/ux" className={styles.backLink}>
             ← Back to Work
           </Link>
         </div>
@@ -888,6 +1014,6 @@ export default function MagickML() {
           label={currentImage.label}
         />
       )}
-    </main>
+    </div>
   );
 }

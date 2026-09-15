@@ -2664,3 +2664,49 @@
     grid-column: span 1;
   }
 }
+
+/* Compact company context before the Magick ML design story. */
+.projectMilestones {
+  padding: 32px 24px 0;
+}
+
+.projectMilestonesInner {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px 28px;
+  background: rgba(95, 158, 160, 0.08);
+  border: 1px solid rgba(95, 158, 160, 0.2);
+  border-radius: 16px;
+  color: #444;
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+.projectMilestonesTitle {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 22px;
+  font-weight: 500;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+}
+
+@media (max-width: 768px) {
+  .carouselButton { min-width: 44px; min-height: 44px; }
+  .carouselDots { display: none; }
+  .carouselCounter { font-size: 14px; color: #666; }
+  .beforeAfterNav { flex-wrap: wrap; gap: 4px; }
+  .beforeAfterDot,
+  .beforeAfterDot:hover {
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+    transform: none;
+    background: radial-gradient(circle, #888 0 5px, transparent 6px);
+  }
+  .beforeAfterDotActive,
+  .beforeAfterDotActive:hover { background: radial-gradient(circle, #386b6d 0 6px, transparent 7px); }
+  .beforeAfterPlayPause { width: 44px; height: 44px; font-size: 14px; margin-left: 0; }
+  .infiniteCarouselTrack { animation: none; }
+  .infiniteCarousel { scroll-snap-type: x proximity; }
+  .infiniteCarouselItem { scroll-snap-align: start; }
+}

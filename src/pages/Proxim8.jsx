@@ -1,3 +1,4 @@
+import { activateMediaOnKey, focusMediaTrigger } from '../components/mediaKeyboard';
 import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styles from '../styles/caseStudy.module.css';
@@ -70,7 +71,7 @@ export default function Proxim8() {
   const currentImage = lightboxIndex !== null ? allLightboxItems[lightboxIndex] : null;
 
   return (
-    <main className={styles.main}>
+    <div className={styles.main}>
       {/* Hero Section */}
       <section className={styles.hero}>
         <div className={styles.heroVideoContainer} style={{ background: '#111' }}>
@@ -141,6 +142,11 @@ export default function Proxim8() {
               loading="lazy"
               className={`${styles.sectionBannerImage} ${styles.clickableImage}`}
               onClick={() => openLightbox('/images/proxim8/header1.png', 'Proxim8 Protocol gameplay overview')}
+             role="button"
+             tabIndex={0}
+             onKeyDown={activateMediaOnKey}
+             onPointerDown={focusMediaTrigger}
+             aria-label="Proxim8 Protocol gameplay overview"
             />
           </div>
         </div>
@@ -179,6 +185,11 @@ export default function Proxim8() {
                     className={styles.clickableImage}
                     style={{ width: '100%', height: '160px', objectFit: 'cover' }}
                     onClick={() => openLightbox(challenge.video, challenge.text)}
+                   role="button"
+                   tabIndex={0}
+                   onKeyDown={activateMediaOnKey}
+                   onPointerDown={focusMediaTrigger}
+                   aria-label={challenge.text}
                   />
                 ) : (
                   <video
@@ -330,6 +341,11 @@ export default function Proxim8() {
                 loading="lazy"
                 className={`${styles.sectionBannerVideo} ${styles.clickableImage}`}
                 onClick={() => openLightbox('/images/proxim8/cutscene-clip-briefing.mp4', 'Mission briefing cutscene')}
+               role="button"
+               tabIndex={0}
+               onKeyDown={activateMediaOnKey}
+               onPointerDown={focusMediaTrigger}
+               aria-label="Mission briefing cutscene"
               />
             ) : (
               <video
@@ -366,6 +382,11 @@ export default function Proxim8() {
                     className={styles.clickableImage}
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     onClick={() => openLightbox('/images/proxim8/game-mechanics1.mp4', 'Game mechanics gameplay')}
+                   role="button"
+                   tabIndex={0}
+                   onKeyDown={activateMediaOnKey}
+                   onPointerDown={focusMediaTrigger}
+                   aria-label="Game mechanics gameplay"
                   />
                 ) : (
                   <video
@@ -410,6 +431,11 @@ export default function Proxim8() {
                     className={styles.clickableImage}
                     style={{ width: '100%', height: '100%', objectFit: 'contain' }}
                     onClick={() => openLightbox('/images/proxim8/gamemaker-UI-running-clip.mp4', 'GameMaker UI running clip')}
+                   role="button"
+                   tabIndex={0}
+                   onKeyDown={activateMediaOnKey}
+                   onPointerDown={focusMediaTrigger}
+                   aria-label="GameMaker UI running clip"
                   />
                 ) : (
                   <video
@@ -457,6 +483,11 @@ export default function Proxim8() {
                   className={styles.clickableImage}
                   style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'opacity 0.2s' }}
                   onClick={() => openLightbox(artCardHovered ? '/images/proxim8/player-sprite-sheet-2.png' : '/images/proxim8/player-sprite-sheet.png', artCardHovered ? 'Player sprite sheet 2' : 'Player sprite sheet')}
+                 role="button"
+                 tabIndex={0}
+                 onKeyDown={activateMediaOnKey}
+                 onPointerDown={focusMediaTrigger}
+                 aria-label="Player sprite sheet"
                 />
               </div>
               <div style={{ padding: '24px' }}>
@@ -488,6 +519,11 @@ export default function Proxim8() {
                     className={styles.clickableImage}
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     onClick={() => openLightbox('/images/proxim8/PROXIM8-Protocol-intro-cutscene.mp4', 'Proxim8 Protocol intro cutscene')}
+                   role="button"
+                   tabIndex={0}
+                   onKeyDown={activateMediaOnKey}
+                   onPointerDown={focusMediaTrigger}
+                   aria-label="Proxim8 Protocol intro cutscene"
                   />
                 ) : (
                   <video
@@ -530,6 +566,11 @@ export default function Proxim8() {
                 loading="lazy"
                 className={`${styles.sectionBannerVideo} ${styles.clickableImage}`}
                 onClick={() => openLightbox('/images/proxim8/workflow-banner.mp4', 'Human-AI Workflow')}
+               role="button"
+               tabIndex={0}
+               onKeyDown={activateMediaOnKey}
+               onPointerDown={focusMediaTrigger}
+               aria-label="Human-AI Workflow"
               />
             ) : (
               <video
@@ -568,6 +609,11 @@ export default function Proxim8() {
                   className={styles.clickableImage}
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   onClick={() => openLightbox('/images/proxim8/workflow1-gamemaker.png', 'GameMaker learning')}
+                 role="button"
+                 tabIndex={0}
+                 onKeyDown={activateMediaOnKey}
+                 onPointerDown={focusMediaTrigger}
+                 aria-label="GameMaker learning"
                 />
               </div>
               <div style={{ padding: '16px' }}>
@@ -590,6 +636,11 @@ export default function Proxim8() {
                   className={styles.clickableImage}
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   onClick={() => openLightbox('/images/proxim8/workflow-code.png', 'Code generation')}
+                 role="button"
+                 tabIndex={0}
+                 onKeyDown={activateMediaOnKey}
+                 onPointerDown={focusMediaTrigger}
+                 aria-label="Code generation"
                 />
               </div>
               <div style={{ padding: '16px' }}>
@@ -612,6 +663,11 @@ export default function Proxim8() {
                   className={styles.clickableImage}
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   onClick={() => openLightbox('/images/proxim8/drone-razorbot-enemy.jpeg', 'Sprite generation')}
+                 role="button"
+                 tabIndex={0}
+                 onKeyDown={activateMediaOnKey}
+                 onPointerDown={focusMediaTrigger}
+                 aria-label="Sprite generation"
                 />
               </div>
               <div style={{ padding: '16px' }}>
@@ -634,6 +690,11 @@ export default function Proxim8() {
                   className={styles.clickableImage}
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   onClick={() => openLightbox('/images/proxim8/workflow4-suno.png', 'Suno music generation')}
+                 role="button"
+                 tabIndex={0}
+                 onKeyDown={activateMediaOnKey}
+                 onPointerDown={focusMediaTrigger}
+                 aria-label="Suno music generation"
                 />
               </div>
               <div style={{ padding: '16px' }}>
@@ -662,6 +723,11 @@ export default function Proxim8() {
                   loading="lazy"
                   className={`${styles.image} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/proxim8/proxim8-player-charactersheet-img.png', 'Proxim8 character design sheet')}
+                 role="button"
+                 tabIndex={0}
+                 onKeyDown={activateMediaOnKey}
+                 onPointerDown={focusMediaTrigger}
+                 aria-label="Proxim8 character sheet"
                 />
               </div>
               <span className={styles.imageLabel}>Proxim8 character design sheet</span>
@@ -674,6 +740,11 @@ export default function Proxim8() {
                   loading="lazy"
                   className={`${styles.image} ${styles.clickableImage}`}
                   onClick={() => openLightbox('/images/proxim8/player-sprite-sheet.png', 'Final sprite sheet after manual adjustments')}
+                 role="button"
+                 tabIndex={0}
+                 onKeyDown={activateMediaOnKey}
+                 onPointerDown={focusMediaTrigger}
+                 aria-label="Final sprite sheet after manual adjustments"
                 />
               </div>
               <span className={styles.imageLabel}>Final sprite sheet after manual adjustments</span>
@@ -709,6 +780,11 @@ export default function Proxim8() {
                 loading="lazy"
                 className={`${styles.sectionBannerVideo} ${styles.clickableImage}`}
                 onClick={() => openLightbox('/images/proxim8/cityscape.mp4', 'Cyberpunk cityscape')}
+               role="button"
+               tabIndex={0}
+               onKeyDown={activateMediaOnKey}
+               onPointerDown={focusMediaTrigger}
+               aria-label="Cyberpunk cityscape"
               />
             ) : (
               <>
@@ -778,6 +854,11 @@ export default function Proxim8() {
                 className={styles.clickableImage}
                 style={{ width: '100%', display: 'block', borderRadius: '12px' }}
                 onClick={() => openLightbox('/images/proxim8/prototype.mp4', 'Early prototype in Gemini Canvas')}
+               role="button"
+               tabIndex={0}
+               onKeyDown={activateMediaOnKey}
+               onPointerDown={focusMediaTrigger}
+               aria-label="Early prototype in Gemini Canvas"
               />
             ) : (
               <video
@@ -805,6 +886,11 @@ export default function Proxim8() {
                 className={styles.clickableImage}
                 style={{ width: '100%', display: 'block', borderRadius: '12px' }}
                 onClick={() => openLightbox('/images/proxim8/AI-pass-run.png', 'AI-generated sprite pass')}
+               role="button"
+               tabIndex={0}
+               onKeyDown={activateMediaOnKey}
+               onPointerDown={focusMediaTrigger}
+               aria-label="AI-generated sprite pass"
               />
             </div>
             <span className={styles.imageLabel} style={{ marginTop: '8px', display: 'block' }}>Often AI would generate a sprite sheet where the same leg is forward in every frame, and other strange visual oddities</span>
@@ -822,6 +908,11 @@ export default function Proxim8() {
                   className={styles.clickableImage}
                   style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                   onClick={() => openLightbox('/images/proxim8/huneter-seeker-test.jpeg', 'Hunter seeker sprite test')}
+                 role="button"
+                 tabIndex={0}
+                 onKeyDown={activateMediaOnKey}
+                 onPointerDown={focusMediaTrigger}
+                 aria-label="Hunter seeker sprite test"
                 />
               </div>
               <span className={styles.imageLabel} style={{ marginTop: '8px', display: 'block' }}>Nanobanana Pro sprite sheets often over-delivered with funny visual anomalies</span>
@@ -836,6 +927,11 @@ export default function Proxim8() {
                     className={styles.clickableImage}
                     style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                     onClick={() => openLightbox('/images/proxim8/hunter-seeker-animation.mp4', 'Hunter seeker animation')}
+                   role="button"
+                   tabIndex={0}
+                   onKeyDown={activateMediaOnKey}
+                   onPointerDown={focusMediaTrigger}
+                   aria-label="Hunter seeker animation"
                   />
                 ) : (
                   <video
@@ -867,6 +963,11 @@ export default function Proxim8() {
                   className={styles.clickableImage}
                   style={{ width: '100%', height: '400px', objectFit: 'cover', objectPosition: 'center top', display: 'block', borderRadius: '12px' }}
                   onClick={() => openLightbox('/images/proxim8/glitch-ledge-grab.mp4', 'Glitch ledge grab gameplay')}
+                 role="button"
+                 tabIndex={0}
+                 onKeyDown={activateMediaOnKey}
+                 onPointerDown={focusMediaTrigger}
+                 aria-label="Glitch ledge grab gameplay"
                 />
               ) : (
                 <video
@@ -915,6 +1016,11 @@ export default function Proxim8() {
                 loading="lazy"
                 className={styles.clickableImage}
                 onClick={() => openLightbox('/images/proxim8/impact-highscore.png', 'High score screen')}
+               role="button"
+               tabIndex={0}
+               onKeyDown={activateMediaOnKey}
+               onPointerDown={focusMediaTrigger}
+               aria-label="High score screen"
               />
             </div>
           </div>
@@ -962,6 +1068,11 @@ export default function Proxim8() {
               className={styles.sectionBanner}
               style={{ position: 'relative', minHeight: '200px' }}
               onClick={() => openLightbox('/images/proxim8/takeaways.mp4', 'Key takeaways gameplay')}
+             role="button"
+             tabIndex={0}
+             onKeyDown={activateMediaOnKey}
+             onPointerDown={focusMediaTrigger}
+             aria-label="Key takeaways"
             >
               <img
                 src="/images/proxim8/takeaways.png"
@@ -988,6 +1099,11 @@ export default function Proxim8() {
                 if (img) img.style.opacity = '1';
               }}
               onClick={() => openLightbox('/images/proxim8/takeaways.mp4', 'Key takeaways gameplay')}
+             role="button"
+             tabIndex={0}
+             onKeyDown={activateMediaOnKey}
+             onPointerDown={focusMediaTrigger}
+             aria-label="Key takeaways"
             >
               <img
                 src="/images/proxim8/takeaways.png"
@@ -1068,7 +1184,7 @@ export default function Proxim8() {
               → View Raw Magic
             </Link>
           </div>
-          <Link to="/" className={styles.backLink}>
+          <Link to="/ux" className={styles.backLink}>
             ← Back to Work
           </Link>
         </div>
@@ -1087,6 +1203,6 @@ export default function Proxim8() {
           label={currentImage.label}
         />
       )}
-    </main>
+    </div>
   );
 }

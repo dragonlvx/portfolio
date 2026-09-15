@@ -1,9 +1,11 @@
 import { useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import CopyEmail from '../components/CopyEmail';
+import AmbientVideo from '../components/AmbientVideo';
 import styles from './Film.module.css';
 import Lightbox from '../components/Lightbox';
 import useIsMobile from '../hooks/useIsMobile';
 
-const EMAIL = 'a.dasilva@project89.org';
 
 // What someone can hire me to make, and how; formats and capabilities rather
 // than tools, which are listed per project below.
@@ -51,7 +53,7 @@ const projects = [
     client: 'Imaginal Media',
     role: 'Director · AI Generation',
     summary:
-      "Imaginal Media's submission to the XPRIZE Future Visions contest. Concept, art direction, generation, edit, and sound. Produced end to end on my own.",
+      "Imaginal Media's submission to the XPRIZE Future Visions contest. Concept, art direction, generation, edit, and sound. Produced end to end on my own in three weeks.",
     tools: ['Photoshop', 'ChatGPT', 'Midjourney', 'Runway', 'Luma Labs', 'Veo', 'Seedance', 'Suno', 'Premiere Pro'],
     video: '/images/film/coherence-720.mp4',
     poster: '/images/film/coherence-titlecard.jpg',
@@ -222,10 +224,10 @@ function HoverVideo({ project, className, onOpen }) {
 
   if (isMobile) {
     return (
-      <div className={`${className} ${styles.clickable}`} onClick={onOpen}>
+      <button type="button" className={`${className} ${styles.clickable}`} onClick={onOpen} aria-label={`Play ${project.title}`}>
         <img src={project.poster} alt={project.title} className={styles.embed} loading="lazy" />
         <span className={styles.playBadge} aria-hidden="true">▶</span>
-      </div>
+      </button>
     );
   }
 
@@ -345,6 +347,7 @@ function ProjectCard({ project, onOpen }) {
           onClick={() => setExpanded((v) => !v)}
           aria-expanded={expanded}
           aria-controls={panelId}
+          aria-label={`${expanded ? "Close" : "Read"} ${project.title} case study`}
         >
           {expanded ? 'Close' : 'Read case study'}
           <span className={`${styles.chevron} ${expanded ? styles.chevronOpen : ''}`} aria-hidden="true">
@@ -353,7 +356,7 @@ function ProjectCard({ project, onOpen }) {
         </button>
 
         {/* 0fr → 1fr animates height without measuring the content */}
-        <div className={`${styles.caseWrap} ${expanded ? styles.caseWrapOpen : ''}`}>
+        <div className={`${styles.caseWrap} ${expanded ? styles.caseWrapOpen : ''}`} hidden={!expanded}>
           <div className={styles.caseInner}>
             <div id={panelId} className={styles.caseStudy}>
               {project.caseStudy.map((section) => (
@@ -362,6 +365,12 @@ function ProjectCard({ project, onOpen }) {
                   <p className={styles.caseBody}>{section.body}</p>
                 </div>
               ))}
+              {project.id === 'project89-trailer' && (
+                <p className={styles.caseBody}>
+                  Explore the wider story world, production workflows, and community tutorials in the{' '}
+                  <Link className={styles.summaryLink} to="/work/project89">Project 89 case study</Link>.
+                </p>
+              )}
             </div>
           </div>
         </div>
@@ -384,16 +393,13 @@ export default function Film() {
   const current = lightboxIndex !== null ? playable[lightboxIndex] : null;
 
   return (
-    <main className={styles.main}>
+    <div className={styles.main}>
       <header className={styles.hero}>
-        <video
+        <AmbientVideo
           className={styles.heroVideo}
           src="/images/film/film-header-720.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
+          poster="/images/film/project89-trailer-titlecard.jpg"
+          label="Showreel"
         />
         <div className={styles.heroScrim} />
         <div className={styles.heroContent}>
@@ -495,9 +501,7 @@ export default function Film() {
             projects, from single shots to full productions. Working remotely with teams
             anywhere.
           </p>
-          <a className={styles.contactButton} href={`mailto:${EMAIL}`}>
-            {EMAIL}
-          </a>
+          <CopyEmail className={styles.contactButton} />
         </div>
       </section>
 
@@ -512,6 +516,6 @@ export default function Film() {
           onNext={playable.length > 1 ? goNext : undefined}
         />
       )}
-    </main>
+    </div>
   );
 }
