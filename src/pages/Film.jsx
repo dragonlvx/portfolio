@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { Fragment, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import ProductionEvidence from '../components/ProductionEvidence';
 import CopyEmail from '../components/CopyEmail';
@@ -38,12 +38,12 @@ const projects = [
         body: "I was brought on as an AI film consultant and asset generator. I designed the generation pipeline the production ran on, then trained the client's two-person team, the writer and the director-editor, to work it themselves. Alongside that I generated reference sheets, still frames, and video clips, and delivered 33 of the 43 shots that made the final cut. The writer produced the remaining ten under my direction.",
       },
       {
-        heading: 'How the pipeline worked',
-        body: 'Consistency is the hard problem in AI film, not generation. Any model will give you a striking single shot; very few will give you the same character, wardrobe, and lighting across forty of them. So the pipeline front-loads that work: locked character and environment reference sheets first, still frames composed against those references second, and video generation only once a frame is approved. Editing stays a human job at the end.',
+        heading: "Building consistency before generation",
+        body: "I established character and environment references first, then composed still frames against them before moving into video generation. This gave the team a consistent foundation for faces, wardrobe, locations, and lighting across the trailer.",
       },
       {
-        heading: 'What I took from it',
-        body: 'Teaching the workflow made the production faster than doing it alone would have. Two people running a pipeline they understand outproduce one specialist working at capacity, and it left the client able to keep going without me; which is what separates a consulting engagement from a freelance one.',
+        heading: "Leaving the team ready to continue",
+        body: "Alongside delivering 33 of the trailer’s 43 final shots, I trained the writer and director-editor to use the workflow themselves. The writer produced the remaining ten shots under my direction, leaving the team with a process they could continue using after the engagement.",
       },
     ],
   },
@@ -61,16 +61,16 @@ const projects = [
     gradient: 'linear-gradient(135deg, #2d1b4e 0%, #1e3a5f 50%, #134e5e 100%)',
     caseStudy: [
       {
-        heading: 'What I did',
-        body: 'COHERENCE was our submission to the Future Visions XPRIZE contest which looked for sci-fi trailers imagining an optimistic future shaped with technology. I produced this project alone; story concept, art direction, reference assets, all video generation and iterations, the edit, and post production including music and sound design. The window was 3 weeks for work that would normally take 6, all while I was running The Exchange contract concurrently. Both delivered on time.',
+        heading: "What I did",
+        body: "I produced COHERENCE end to end in three weeks, from story concept and art direction through generation, editing, music, and sound design. I would normally allow myself around six weeks for that scope. Delivering it alongside The Exchange meant extra hours, rapid experimentation, and adapting my workflows to speed up stages wherever I could. Both projects were delivered on time.",
       },
       {
-        heading: 'How it came together',
-        body: "The trailer runs two visual registers against each other: restrained black & white for the 'real world' thread, and then very saturated, geometric latent-space environments. Holding both inside one identity was the central art-direction problem. Midjourney carried the distinctive art-styles while ChatGPT images held character and location consistency. Seedance 2.0 and VEO video models drove the videos, chained together rather than used in isolation.",
+        heading: "How it came together",
+        body: "The film moves between a restrained black-and-white world and saturated, geometric environments. The challenge was to make those different visual styles feel like parts of the same story. Character, prop, and location references provided continuity while I explored lighting, color, and form.",
       },
       {
-        heading: 'What I took from it',
-        body: 'The tools crossed a line here. This was the first time generated footage felt genuinely capable of believable live action when pushed the right way, which means one-person productions are no longer a compromise with enough time. But I also learned that two or three talented people each owning a stage of the pipeline and well co-ordinated could move even faster than one person owning all of it, and without burning anyone out!',
+        heading: "What the deadline taught me",
+        body: "The compressed schedule pushed me to adapt quickly and look for faster ways through the production. It also made the value of a small, coordinated team clearer: I could deliver the full project alone, but sharing responsibility across production stages would make that pace more sustainable.",
       },
     ],
   },
@@ -81,7 +81,7 @@ const projects = [
     client: 'Project 89',
     role: 'Director · AI Generation',
     summary:
-      'Thriller trailer for the Project 89 text adventure game. Directed and produced end to end.',
+      "A thriller trailer translating the opening of Project 89’s text adventure into film. I directed and produced it end to end, incorporating established lore, hidden references, and working activation codes that connect the trailer to the game.",
     link: { prefix: 'Playable at', label: 'project89.org', href: 'https://www.project89.org' },
     tools: ['Photoshop', 'ChatGPT', 'Veo', 'Suno', 'ElevenLabs', 'Premiere Pro'],
     video: '/images/film/project89-trailer-720.mp4',
@@ -93,12 +93,12 @@ const projects = [
         body: 'A thriller trailer introducing the Project 89 mystery to new audiences and visualising the opening of the text adventure game it promotes. I directed and produced it end to end. Woven through it are references to the wider Project 89 universe; custom posters on walls, easter eggs, and working activation codes for the game itself.',
       },
       {
-        heading: 'How it came together',
-        body: 'The constraint was fidelity: preserving established Project 89 lore, symbols, and aesthetic while adding new detail and capturing how the game actually feels to play. ChatGPT and Photoshop built the still frames, Google Veo drove the video generation, Suno scored it, and ElevenLabs handled sound design. This was early 2026, and the video models took heavy prompt iteration and manual cleanup to hold a shot together.',
+        heading: "How it came together",
+        body: "ChatGPT and Photoshop built the still frames, Google Veo drove the video generation, Suno scored it, and ElevenLabs handled sound design. Preserving the world’s symbols, visual identity, and narrative details required repeated generation passes and manual cleanup.",
       },
       {
-        heading: 'What I took from it',
-        body: 'I seem to reliably pick projects that need more than the tools can currently do, so much of the work becomes finding creative routes around technical limits. This one confirmed that the gap between what I can picture and what I can actually build is usually a workaround problem rather than a capability one. The tools have moved a long way even in the months since.',
+        heading: "Connecting the trailer to the game",
+        body: "The most interesting part was making the trailer function as another entry point into the story. Posters, background details, and working activation codes gave viewers connections to discover beyond the main sequence.",
       },
     ],
   },
@@ -109,7 +109,7 @@ const projects = [
     client: 'Project 89',
     role: 'Director · AI Generation',
     summary:
-      'Music video for our AI popstar SIM SIREN, generated and cut to an original AI track.',
+      "A music video for SIM SIREN, Project 89’s AI popstar, produced in about a week. I generated the footage and manually edited it to the track, shaping the rhythm, shot variety, and singing sequences.",
     tools: ['Photoshop', 'ChatGPT', 'Midjourney', 'Veo', 'Suno', 'Premiere Pro'],
     video: '/images/project89/showcase-ghost-neuralnet.mp4',
     poster: '/images/project89/showcase-ghost-neuralnet-poster.jpg',
@@ -120,12 +120,12 @@ const projects = [
         body: 'A music video for SIM SIREN, our AI popstar creation, cut to an original AI generated track. I built it in about a week in 2025, generating a large volume of clips in Midjourney and Veo while pushing for character and art style consistency across a range of locations and outfits. Generating the footage was the quick part.',
       },
       {
-        heading: 'How it came together',
-        body: 'The edit was where the time went. I cut the strongest shots manually against the music to maximise visual flow and keep the shot variety moving. This was before video models could handle lip sync, so in the sections where she needed to look like she was singing, I synced the clips to the track by hand. Tricky, and the most satisfying part of the build.',
+        heading: "How it came together",
+        body: "The edit was where the time went. I cut the strongest shots manually against the music to maximise visual flow and keep the shot variety moving. With the tools I was using at the time, the singing sections required manual synchronization. I selected and timed clips against the vocal track to make those moments feel connected to the performance.",
       },
       {
-        heading: 'What I took from it',
-        body: 'Music videos turn out to be a good fit for generative tools. A linear narrative demands a continuity the models still struggle with; a music video gives you room for striking imagery that does not have to add up shot by shot. That freedom is the appeal. The tooling has improved enormously since, and it is a format I want to spend more time in.',
+        heading: "Shaping the performance",
+        body: "The edit was the most satisfying part: finding shots that worked together, shaping their rhythm, and making the performance feel connected to the music.",
       },
     ],
   },
@@ -136,23 +136,23 @@ const projects = [
     client: 'Project 89',
     role: 'Director · AI Generation',
     summary:
-      'Commercial promo for an immersive AI powered NFT game in the Project 89 transmedia universe.',
+      "A commercial promo for Timeline Wars, combining cinematic imagery, animation, and footage of the game’s prototype interface within one Project 89 visual identity.",
     tools: ['Photoshop', 'ChatGPT', 'Midjourney', 'Nanobanana', 'Veo', 'Suno', 'ElevenLabs', 'Premiere Pro'],
     video: '/images/project89/P89-TimelineWars-commercial.mp4',
     poster: '/images/project89/P89-TimelineWars-commercial-poster.jpg',
     gradient: 'linear-gradient(135deg, #3d1f1f 0%, #5c2e2e 50%, #2d1a1a 100%)',
     caseStudy: [
       {
-        heading: 'What I did',
-        body: 'A commercial promo for Timeline Wars, an immersive AI powered game inside the Project 89 universe. The spot pulled in three different visual modes: live action, animation, and real prototype UI captured from the game as it headed toward launch. All of it had to read as one consistent brand by the end.',
+        heading: "What I did",
+        body: "A commercial promo for Timeline Wars, an immersive AI powered game inside the Project 89 universe. The spot pulled in three different visual modes: cinematic imagery, animation, and real prototype UI captured from the game as it headed toward launch. All of it had to read as one consistent brand by the end.",
       },
       {
-        heading: 'How it came together',
-        body: 'The video models in 2025 rarely did what a prompt asked, especially anything involving believable physics. So most shots were built from specific start and end frames, generated then massaged in Photoshop before the model interpolated between them. That plus constant prompt iteration, a lot of burned credits back when credits were expensive, and creative editing to cover what the models could not deliver.',
+        heading: "How it came together",
+        body: "Many shots began with carefully prepared start and end frames. I refined those images in Photoshop, generated the motion between them, and used editing to bring the different visual modes together.",
       },
       {
-        heading: 'What I took from it',
-        body: 'Holding character consistency while cutting between live action, animation, and product screens was the real problem, and getting all three to feel like one thing is the part I am still proud of. The generation quality dates it; I could produce this at a much higher standard now. It stays one of my favourites for the vibe and for how it all came together at the last minute.',
+        heading: "One consistent identity",
+        body: "Bringing character imagery, animation, and product screens into one consistent identity was the central challenge. That combination remains my favourite part of the piece.",
       },
     ],
   },
@@ -163,7 +163,7 @@ const projects = [
     client: 'Personal Project',
     role: 'Director · AI Generation',
     summary:
-      'A new superhero pilot mini-episode built end to end as a one-day sprint; a test of how far a solo AI pipeline can get in a single working session.',
+      "A one-minute superhero pilot created in a single day as an experiment in AI-assisted production, from concept to finished cut.",
     tools: ['ChatGPT', 'Seedance', 'Premiere Pro'],
     video: '/images/film/dragon-ep01-720.mp4',
     poster: '/images/film/dragon-ep01-titlecard.jpg',
@@ -174,12 +174,12 @@ const projects = [
         body: 'A pilot for a superhero mini episode, built in a single working session. The premise puts a new custom hero against real world cryptids in an unfamiliar setting, with a few easter eggs pointing back at the Project 89 universe without depending on it. About a minute long, concept through finished cut, all in one day.',
       },
       {
-        heading: 'How it came together',
-        body: 'The point was to see how much of the pipeline could run automatically. The newest GPT image models and Seedance 2.0 held consistency well enough to generate the story outline, storyboards, visuals, and shot flow with little intervention. Beyond some manual editing at the end, the sequence largely assembled itself.',
+        heading: "How it came together",
+        body: "I tested how much of the workflow could be automated, using GPT image models and Seedance 2.0 across story development, storyboards, visuals, and shot flow, with manual editing at the end.",
       },
       {
-        heading: 'What I took from it',
-        body: 'It is not as polished as it would be with real manual work put into it, and that was the finding rather than a disappointment. As a benchmark of what an automated pipeline can do mostly unattended, it lands a long way past where the same test would have a year earlier. That gap is the thing worth tracking.',
+        heading: "What the experiment showed",
+        body: "The result helped me assess what the workflow could produce in one session and where further manual refinement would improve the finished piece.",
       },
     ],
   },
@@ -360,13 +360,21 @@ function ProjectCard({ project, onOpen }) {
         <div className={`${styles.caseWrap} ${expanded ? styles.caseWrapOpen : ''}`} hidden={!expanded}>
           <div className={styles.caseInner}>
             <div id={panelId} className={styles.caseStudy}>
-              {project.caseStudy.map((section) => (
-                <div key={section.heading} className={styles.caseSection}>
+              {project.caseStudy.map((section, index) => (
+                <Fragment key={section.heading}>
+                <div className={styles.caseSection}>
                   <h4 className={styles.caseHeading}>{section.heading}</h4>
                   <p className={styles.caseBody}>{section.body}</p>
                 </div>
+                {expanded && index === 1 && <ProductionEvidence projectId={project.id} />}
+                </Fragment>
               ))}
-              {expanded && <ProductionEvidence projectId={project.id} />}
+              {['the-exchange', 'coherence'].includes(project.id) && (
+                <div className={styles.caseSection}>
+                  <p className={styles.caseBody}>These examples show part of the process. Get in touch to discuss the workflow or how it could apply to your production.</p>
+                  <CopyEmail className={styles.evidenceContact}>Copy email to get in touch</CopyEmail>
+                </div>
+              )}
               {project.id === 'project89-trailer' && (
                 <p className={styles.caseBody}>
                   Explore the wider story world, production workflows, and community tutorials in the{' '}
