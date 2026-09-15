@@ -1,4 +1,5 @@
 import { Fragment, useState, useRef } from 'react';
+import { flushSync } from 'react-dom';
 import { Link } from 'react-router-dom';
 import ProductionEvidence from '../components/ProductionEvidence';
 import CopyEmail from '../components/CopyEmail';
@@ -305,6 +306,17 @@ function ProjectMedia({ project, className, onOpen }) {
 function ProjectCard({ project, onOpen }) {
   const [expanded, setExpanded] = useState(false);
   const panelId = `case-${project.id}`;
+  const toggleRef = useRef(null);
+  const endRef = useRef(null);
+
+  const closeFromBottom = () => {
+    // Keep the boundary after this study stationary as its content disappears.
+    const previousTop = endRef.current.getBoundingClientRect().top;
+    flushSync(() => setExpanded(false));
+    const shift = endRef.current.getBoundingClientRect().top - previousTop;
+    window.scrollBy({ top: shift, behavior: 'instant' });
+    toggleRef.current.focus({ preventScroll: true });
+  };
 
   return (
     <article className={styles.project}>
@@ -345,6 +357,7 @@ function ProjectCard({ project, onOpen }) {
         <button
           type="button"
           className={styles.expandButton}
+          ref={toggleRef}
           onClick={() => setExpanded((v) => !v)}
           aria-expanded={expanded}
           aria-controls={panelId}
@@ -381,9 +394,15 @@ function ProjectCard({ project, onOpen }) {
                   <Link className={styles.summaryLink} to="/work/project89">Project 89 case study</Link>.
                 </p>
               )}
+              <button type="button" className={`${styles.expandButton} ${styles.bottomClose}`}
+                onClick={closeFromBottom} aria-expanded={expanded} aria-controls={panelId}
+                aria-label={`Close ${project.title} case study and continue`}>
+                Close case study <span aria-hidden="true">▴</span>
+              </button>
             </div>
           </div>
         </div>
+        <div ref={endRef} aria-hidden="true" />
       </div>
     </article>
   );

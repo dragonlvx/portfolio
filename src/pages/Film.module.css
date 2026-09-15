@@ -593,3 +593,5 @@ button.clickable { border: 0; padding: 0; width: 100%; font: inherit; background
 }
 
 .evidenceContact { margin-top: 14px; min-height: 44px; padding: 10px 16px; border-radius: 8px; background: #1a1a1a; color: #fff; font-size: 14px; }
+
+.bottomClose { min-height: 44px; margin-top: 24px; padding: 8px 0; }
